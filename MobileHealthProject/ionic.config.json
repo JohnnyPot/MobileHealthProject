@@ -1,0 +1,7 @@
+{
+  "name": "MobileHealthProject",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
