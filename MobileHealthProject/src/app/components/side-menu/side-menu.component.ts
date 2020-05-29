@@ -27,12 +27,12 @@ export class SideMenuComponent implements OnInit {
           {
             title : "Medicines",
             url   : "/medicines",
-            icon  : "medicines"
+            icon  : "medkit"
           },
           {
             title : "Food",
             url   : "/food",
-            icon  : "food"
+            icon  : "pizza"
           },
         ]
   }
