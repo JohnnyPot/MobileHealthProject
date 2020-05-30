@@ -30,9 +30,19 @@ export class SideMenuComponent implements OnInit {
             icon  : "medkit"
           },
           {
-            title : "Food",
-            url   : "/food",
-            icon  : "pizza"
+                title : "Foods",
+                url   : "/food",
+                icon  : "pizza"
+          },
+          {
+            title : "Users",
+            url   : "/users",
+            icon  : "people"
+          },
+          {
+            title : "About",
+            url   : "/about",
+            icon  : "information-circle"
           },
         ]
   }
