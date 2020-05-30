@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { InteractionModel } from "../models/interaction.model"
+import {FoodModel} from "../models/food.model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,45 @@ export class ApiStorageService {
 
   constructor(private http: HttpClient) { }
 
-  // Get Todos
+
+  private foodList: FoodModel[] = [
+    {
+      id: 'r1',
+      title: 'Schnitzel',
+      // tslint:disable-next-line:max-line-length
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG/220px-Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG',
+      ingredients: ['French fries', 'Pork meat', 'flour', 'eggs']
+    },
+    {
+      id: 'r2',
+      title: 'Spaghetti',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Spaghetti_spiral%2C_2008.jpg/126px-Spaghetti_spiral%2C_2008.jpg',
+      ingredients: ['Pasta', 'Tomatoes', 'Salt', 'Garlic', 'Onion']
+    }
+  ];
+
+  getAllFood() {
+    return [...this.foodList];
+    // return this.recipes;
+  }
+
+  // getRecipe(recipeId: string) {
+  //   return {
+  //     ...this.recipes.find(recipe => {
+  //       return recipe.id === recipeId;
+  //     })
+  //   };
+  // }
+  //
+  // deleteRecipe(recipeId: string) {
+  //   this.recipes = this.recipes.filter(recipe => {
+  //     return recipe.id !== recipeId;
+  //   });
+  // }
+
+  // ----------------------------------- HTTP Requests ------------------------------------------- //
+
+  // Get Interactions
   getInteractions(): Observable<InteractionModel[]>{
     return this.http.get<InteractionModel[]>(`${this.interactionUrl}${this.interactionLimit}`);
   }

@@ -9,16 +9,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SideMenuComponent } from "./components/side-menu/side-menu.component";
+import {FoodItemComponent} from "./components/food-item/food-item.component";
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
   declarations: [AppComponent, SideMenuComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent]
 })

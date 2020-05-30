@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiStorageService } from "../../services/api-storage.service";
 
 @Component({
   selector: 'app-food',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoodPage implements OnInit {
 
-  constructor() { }
+  constructor(private apiStorageService: ApiStorageService) { }
+  // constructor() { }
+
+  getAllFood(){
+    return this.apiStorageService.getAllFood()
+  }
 
   ngOnInit() {
   }

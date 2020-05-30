@@ -8,3 +8,12 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <ion-list>
+    <app-food-item
+            *ngFor="let food of getAllFood()"
+            [foodItem]="food">
+    </app-food-item>
+  </ion-list>
+</ion-content>
