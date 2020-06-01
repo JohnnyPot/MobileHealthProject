@@ -34,9 +34,8 @@ export class MedicinesPage implements OnInit {
     this.apiStorageService.getRxcui(this.name).subscribe(med => {
       if (med.idGroup.hasOwnProperty('rxnormId')) {
 
-        console.log(med.idGroup.rxnormId[0]);
-
         this.addMed(med.idGroup.name, med.idGroup.rxnormId[0]);
+        // console.log(med.idGroup.rxnormId[0]);
 
       }else{
         this.alertCtrl.create({
