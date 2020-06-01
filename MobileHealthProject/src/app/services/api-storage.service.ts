@@ -82,7 +82,7 @@ export class ApiStorageService {
 
   // Get Interactions
   getRxcui(name: string): Observable<any>{
-    return  this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
+    return this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiStorageService} from "../../services/api-storage.service";
+import {AlertController} from "@ionic/angular";
 
 @Component({
   selector: 'app-medicines',
@@ -11,7 +12,8 @@ export class MedicinesPage implements OnInit {
   name: string
 
 
-  constructor(private apiStorageService: ApiStorageService) { }
+  constructor(private apiStorageService: ApiStorageService,
+              private alertCtrl: AlertController) { }
 
   searchForMed() {
      this.apiStorageService.getRxcui(this.name);
@@ -19,9 +21,21 @@ export class MedicinesPage implements OnInit {
 
   onSubmit(): void{
     this.apiStorageService.getRxcui(this.name).subscribe(med => {
-      console.log(med.idGroup.rxnormId[0]);
+      if (med.idGroup.hasOwnProperty('rxnormId')) {
+        console.log(med.idGroup.rxnormId);
+      }else{
+        this.alertCtrl.create({
+          header: 'There is no such Med`s name ',
+          message: 'Be sure you type you do not misspell the name',
+          buttons: [{
+            text: 'Ok',
+            role: 'Okay'
+          }]
+        }).then(alertEl => {
+          alertEl.present();
+        });
+      }
     })
-    console.log();
     // console.log('ok');
   }
 

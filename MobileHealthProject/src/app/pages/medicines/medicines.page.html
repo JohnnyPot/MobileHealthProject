@@ -8,21 +8,20 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
+
 <ion-content>
 
     <ion-card>
-
         <ion-card-header>
-            <ion-card-title>Add a new medicine</ion-card-title>
+            <ion-card-title>Add a new medicine on your list</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
 
+        <ion-card-content>
             <ion-item>
                 <ion-label position="floating">Med's Name</ion-label>
                 <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
                 <!--            <ion-button type="submit" (click)="onSubmit()">Submit</ion-button>-->
             </ion-item>
-
             <div class="ion-margin-vertical ion-text-right">
                 <ion-button (click)="onClear()" fill="outline" color="danger" id="btn-cancel">
                     <ion-icon slot="start" name="trash-outline"></ion-icon>
@@ -33,7 +32,6 @@
                     Search
                 </ion-button>
             </div>
-
         </ion-card-content>
     </ion-card>
 
