@@ -61,6 +61,11 @@ export class ApiStorageService {
     // return this.recipes;
   }
 
+  // Delete
+  addMed(med:MedicineModel): void {
+    this.medList.push(med);
+  }
+
   private medList: MedicineModel[] = [
     {
       name: 'ebastine',

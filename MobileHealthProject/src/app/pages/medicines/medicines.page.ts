@@ -20,10 +20,24 @@ export class MedicinesPage implements OnInit {
      return this.apiStorageService.getAllMeds();
   }
 
+  addMed(_name: string, _rxnormId: number): void {
+    const med = {
+      name: _name,
+      rxnormId: _rxnormId
+    }
+
+    this.apiStorageService.addMed(med);
+
+  }
+
   onSubmit(): void{
     this.apiStorageService.getRxcui(this.name).subscribe(med => {
       if (med.idGroup.hasOwnProperty('rxnormId')) {
-        console.log(med.idGroup.rxnormId);
+
+        console.log(med.idGroup.rxnormId[0]);
+
+        this.addMed(med.idGroup.name, med.idGroup.rxnormId[0]);
+
       }else{
         this.alertCtrl.create({
           header: 'There is no such Med`s name ',
