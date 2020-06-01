@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiStorageService} from "../../services/api-storage.service";
 
 @Component({
   selector: 'app-medicines',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicinesPage implements OnInit {
 
-  constructor() { }
+  name: string
+
+  constructor(private apiStorageService: ApiStorageService) { }
+
+  searchForMed() {
+     this.apiStorageService.getRxcui(this.name);
+  }
+
+  onSubmit(): void{
+    console.log(this.apiStorageService.getRxcui(this.name));
+    // console.log('ok');
+  }
 
   ngOnInit() {
   }

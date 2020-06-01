@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { InteractionModel } from "../models/interaction.model"
 import {FoodModel} from "../models/food.model";
+import {MedicineModel} from "../models/medicine.model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,8 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiStorageService {
-
-  interactionUrl:string = 'https://jsonplaceholder.typicode.com/todos';
+  interactionUrl:string = 'https://rxnav.nlm.nih.gov/REST/';
   interactionLimit = '?_limit=5';
 
   constructor(private http: HttpClient) { }
@@ -57,6 +57,14 @@ export class ApiStorageService {
   // }
 
   // ----------------------------------- HTTP Requests ------------------------------------------- //
+
+
+  // Get Interactions
+  getRxcui(name: string): any{
+    return this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
+  }
+
+
 
   // Get Interactions
   getInteractions(): Observable<InteractionModel[]>{
