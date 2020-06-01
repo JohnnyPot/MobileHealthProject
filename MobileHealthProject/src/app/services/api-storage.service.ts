@@ -56,7 +56,7 @@ export class ApiStorageService {
   //   });
   // }
 
-  getAllMeds() {
+  getAllMeds(): MedicineModel[]{
     return [...this.medList];
     // return this.recipes;
   }

@@ -35,5 +35,12 @@
         </ion-card-content>
     </ion-card>
 
+    <ion-list>
+        <app-med-item
+                *ngFor="let med of this.getListOfMed()"
+                [medItem]="med">
+        </app-med-item>
+    </ion-list>
+
 
 </ion-content>

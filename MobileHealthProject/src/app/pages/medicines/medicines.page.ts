@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiStorageService} from "../../services/api-storage.service";
 import {AlertController} from "@ionic/angular";
+import {MedicineModel} from "../../models/medicine.model";
 
 @Component({
   selector: 'app-medicines',
@@ -15,8 +16,8 @@ export class MedicinesPage implements OnInit {
   constructor(private apiStorageService: ApiStorageService,
               private alertCtrl: AlertController) { }
 
-  searchForMed() {
-     this.apiStorageService.getRxcui(this.name);
+  getListOfMed(): MedicineModel[]{
+     return this.apiStorageService.getAllMeds();
   }
 
   onSubmit(): void{
