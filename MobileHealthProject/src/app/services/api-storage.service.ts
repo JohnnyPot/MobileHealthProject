@@ -56,12 +56,33 @@ export class ApiStorageService {
   //   });
   // }
 
+  getAllMeds() {
+    return [...this.medList];
+    // return this.recipes;
+  }
+
+  private medList: MedicineModel[] = [
+    {
+      name: 'ebastine',
+      rxnormId: 23796
+    },
+    {
+      name: 'lipitor',
+      rxnormId: 153165
+    }
+  ];
+
   // ----------------------------------- HTTP Requests ------------------------------------------- //
 
 
   // Get Interactions
-  getRxcui(name: string): any{
-    return this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
+  // getRxcui(name: string): Observable<MedicineModel>{
+  //   return this.http.get<MedicineModel>(`${this.interactionUrl}rxcui.json?name=${name}`);
+  // }
+
+  // Get Interactions
+  getRxcui(name: string): Observable<any>{
+    return  this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
   }
 
 

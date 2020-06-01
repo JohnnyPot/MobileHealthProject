@@ -10,6 +10,7 @@ export class MedicinesPage implements OnInit {
 
   name: string
 
+
   constructor(private apiStorageService: ApiStorageService) { }
 
   searchForMed() {
@@ -17,8 +18,15 @@ export class MedicinesPage implements OnInit {
   }
 
   onSubmit(): void{
-    console.log(this.apiStorageService.getRxcui(this.name));
+    this.apiStorageService.getRxcui(this.name).subscribe(med => {
+      console.log(med.idGroup.rxnormId[0]);
+    })
+    console.log();
     // console.log('ok');
+  }
+
+  onClear(): void{
+    this.name = '';
   }
 
   ngOnInit() {

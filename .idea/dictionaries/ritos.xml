@@ -2,7 +2,9 @@
   <dictionary name="ritos">
     <words>
       <w>medkit</w>
+      <w>meds</w>
       <w>rxcui</w>
+      <w>rxnorm</w>
     </words>
   </dictionary>
 </component>
