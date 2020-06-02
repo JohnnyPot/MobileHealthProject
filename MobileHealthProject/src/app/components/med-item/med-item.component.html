@@ -1,3 +1,7 @@
 <ion-item>
   <ion-label>{{medItem.name}}: {{medItem.rxnormId}}</ion-label>
+  <ion-button (click)="onDelete()" fill="outline" color="danger" id="btn-cancel">
+    <ion-icon slot="start" name="trash-outline"></ion-icon>
+    Delete
+  </ion-button>
 </ion-item>

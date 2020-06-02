@@ -61,9 +61,25 @@ export class ApiStorageService {
     // return this.recipes;
   }
 
+  checkMed(rxnormId: number){
+    return this.medList.filter(meds => {
+      return meds.rxnormId === rxnormId;
+    }).length < 1;
+  }
+
   // Delete
   addMed(med:MedicineModel): void {
-    this.medList.push(med);
+
+    if(this.checkMed(med.rxnormId)) {
+      this.medList.push(med);
+    }
+
+  }
+
+  deleteMed(recipeId: number) {
+    this.medList = this.medList.filter(med => {
+      return med.rxnormId !== recipeId;
+    });
   }
 
   private medList: MedicineModel[] = [
