@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'users-popup',
     loadChildren: () => import('./pages/users-popup/users-popup.module').then( m => m.UsersPopupPageModule)
   },
+  {
+    path: 'add-user-popup',
+    loadChildren: () => import('./pages/add-user-popup/add-user-popup.module').then( m => m.AddUserPopupPageModule)
+  },
 ];
 
 @NgModule({

@@ -16,12 +16,14 @@ import {FoodPage} from "./pages/food/food.page";
 import {UserPage} from "./pages/user/user.page";
 import {MenuHeaderComponent} from "./components/menu-header/menu-header.component";
 import {MenuHeaderModule} from "./modules/menu-header/menu-header.module";
+import {AddUserPopupPage} from "./pages/add-user-popup/add-user-popup.page";
+import {AddUserPopupPageModule} from "./pages/add-user-popup/add-user-popup.module";
 
 
 @NgModule({
   declarations: [AppComponent, SideMenuComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule, AddUserPopupPageModule],
   providers: [
     StatusBar,
     SplashScreen,
