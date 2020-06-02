@@ -11,24 +11,33 @@ export class InteractionsPage implements OnInit {
 
   constructor(private apiStorageService: ApiStorageService) { }
 
-  getInteractions(): any[]{
-
+  getInteractions() {
     const interaction_list = '';
 
+    const medList = this.apiStorageService.getAllMeds();
 
-    for(let med of this.apiStorageService.getAllMeds()){
-      interaction_list.concat(med.rxnormId + '+')
+    // let med of this.apiStorageService.getAllMeds()
+    for(let i = 0; i < medList.length; i++) {
+      if(i < medList.length - 1){
+        interaction_list.concat(medList[i].rxnormId.toString() + '+')
+      }else{
+        interaction_list.concat(medList[i].rxnormId.toString())
+      }
     }
 
     this.apiStorageService.getInteractions(interaction_list).subscribe( interactionJson => {
 
-      if (interactionJson.idGroup.hasOwnProperty('rxnormId')) {
+      console.log(interactionJson);
 
-      }
+
+      // if (interactionJson.hasOwnProperty('fullInteractionTypeGroup')) {
+      //   console.log(interactionJson);
+      //
+      // }
 
     });
 
-    return
+    // return
   }
 
   ngOnInit() {
