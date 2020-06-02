@@ -51,6 +51,10 @@ export class UserPage implements OnInit {
     return this.apiStorageService.getAllUsers();
   }
 
+  changeUser(user : UserModel) {
+    this.apiStorageService.changeUser(user);
+  }
+
   ngOnInit() {
   }
 

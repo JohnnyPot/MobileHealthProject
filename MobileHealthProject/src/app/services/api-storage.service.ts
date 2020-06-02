@@ -69,6 +69,9 @@ export class ApiStorageService {
 
     constructor(private http: HttpClient,
                 private storage: StorageService) {
+        this.userData = {};
+        this.userData.medList = this.medList;
+        this.userData.foodList = this.foodList;
         this.loadData();
     }
 
@@ -104,15 +107,23 @@ export class ApiStorageService {
     }
 
     changeUser(user: UserModel){
+        this.activeUser = user;
         this.storage.getObject("userData" + user.id.toString()).then((userData) =>
         {
-            console.log("User has saved data:" + userData);
+            console.log("Changing user. User '" + user.name + "'has saved data:");
+            console.log(JSON.stringify(userData));
+
             if (userData) {
-                this.userData = userData.value;
+                this.userData = userData;
                 this.medList = this.userData.medList;
+                console.log(this.medList);
                 this.foodList = this.userData.foodList;
             } else {
                 console.log("Using dummy data");
+                if (user.name != 'Guest') {
+                    this.medList = [];
+                    this.foodList = [];
+                }
             }
         });
     }
@@ -162,7 +173,8 @@ export class ApiStorageService {
         this.userData.medList = this.medList;
         this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(()=>
         {
-            console.log('Saved medList');
+            console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
+            console.log(JSON.stringify(this.userData));
         });
     }
 
