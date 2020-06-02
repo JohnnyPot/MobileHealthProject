@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/medicines/medicines.module').then( m => m.MedicinesPageModule)
   },
   {
+    path: 'interactions',
+    loadChildren: () => import('./pages/interactions/interactions.module').then( m => m.InteractionsPageModule)
+  },
+  {
     path: 'food',
     loadChildren: () => import('./pages/food/food.module').then( m => m.FoodPageModule)
   },
@@ -34,7 +38,7 @@ const routes: Routes = [
   {
     path: 'add-user-popup',
     loadChildren: () => import('./pages/add-user-popup/add-user-popup.module').then( m => m.AddUserPopupPageModule)
-  },
+  }
 ];
 
 @NgModule({

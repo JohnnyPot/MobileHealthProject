@@ -1,50 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-side-menu',
-  templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.scss'],
+    selector: 'app-side-menu',
+    templateUrl: './side-menu.component.html',
+    styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent implements OnInit {
 
-  navigate: any;
+    navigate: any;
 
-  constructor() {
-    this.sideMenu();
-  }
+    constructor() {
+        this.sideMenu();
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
-  sideMenu()
-  {
-    this.navigate =
-        [
-          {
-            title : "Home",
-            url   : "/home",
-            icon  : "home"
-          },
-          {
-            title : "Medicines",
-            url   : "/medicines",
-            icon  : "medkit"
-          },
-          {
-                title : "Foods",
-                url   : "/food",
-                icon  : "pizza"
-          },
-          {
-            title : "Users",
-            url   : "/users",
-            icon  : "people"
-          },
-          {
-            title : "About",
-            url   : "/about",
-            icon  : "information-circle"
-          },
-        ]
-  }
+    sideMenu() {
+        this.navigate =
+            [
+                {
+                    title: "Home",
+                    url: "/home",
+                    icon: "home"
+                },
+                {
+                    title: "Medicines",
+                    url: "/medicines",
+                    icon: "medkit"
+                },
+                {
+                    title: "Interactions",
+                    url: "/interactions",
+                    icon: "flask"
+                },
+                {
+                    title: "Foods",
+                    url: "/food",
+                    icon: "pizza"
+                },
+                {
+                    title: "Users",
+                    url: "/users",
+                    icon: "people"
+                },
+                {
+                    title: "About",
+                    url: "/about",
+                    icon: "information-circle"
+                },
+            ]
+    }
 
 }
