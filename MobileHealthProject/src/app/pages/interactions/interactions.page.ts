@@ -30,10 +30,10 @@ export class InteractionsPage implements OnInit {
       console.log(interactionJson);
 
 
-      // if (interactionJson.hasOwnProperty('fullInteractionTypeGroup')) {
-      //   console.log(interactionJson);
-      //
-      // }
+      if (interactionJson.hasOwnProperty('fullInteractionTypeGroup')) {
+        console.log('mpravo');
+
+      }
 
     });
 
