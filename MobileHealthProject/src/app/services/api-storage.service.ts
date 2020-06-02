@@ -164,24 +164,24 @@ export class ApiStorageService {
 
 
     // Get Interactions
-    getInteractions(): Observable<InteractionModel[]> {
-        return this.http.get<InteractionModel[]>(`${this.interactionUrl}${this.interactionLimit}`);
+    getInteractions(listOfRxcui: string): Observable<any> {
+        return this.http.get(`${this.interactionUrl}interaction/list.json?rxcuis=${listOfRxcui}`);
     }
 
-    // Toggle Completed
-    toggleCompleted(interaction: InteractionModel): Observable<any> {
-        const url = `${this.interactionUrl}/${interaction.id}`;
-        return this.http.put(url, interaction, httpOptions);
-    }
-
-    // Delete
-    deleteInteraction(interaction: InteractionModel): Observable<any> {
-        const url = `${this.interactionUrl}/${interaction.id}`;
-        return this.http.delete(url, httpOptions);
-    }
-
-    // Delete
-    addInteraction(interaction: InteractionModel): Observable<InteractionModel> {
-        return this.http.post<InteractionModel>(this.interactionUrl, interaction, httpOptions);
-    }
+    // // Toggle Completed
+    // toggleCompleted(interaction: InteractionModel): Observable<any> {
+    //     const url = `${this.interactionUrl}/${interaction.id}`;
+    //     return this.http.put(url, interaction, httpOptions);
+    // }
+    //
+    // // Delete
+    // deleteInteraction(interaction: InteractionModel): Observable<any> {
+    //     const url = `${this.interactionUrl}/${interaction.id}`;
+    //     return this.http.delete(url, httpOptions);
+    // }
+    //
+    // // Delete
+    // addInteraction(interaction: InteractionModel): Observable<InteractionModel> {
+    //     return this.http.post<InteractionModel>(this.interactionUrl, interaction, httpOptions);
+    // }
 }

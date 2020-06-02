@@ -26,7 +26,7 @@ export class AddUserPopupPage implements OnInit {
         } else {
             this.alertCtrl.create({
                 header: 'Warning',
-                message: 'This med there is already in your list ',
+                message: 'This username has already been in used',
                 buttons: [{
                     text: 'Ok',
                     role: 'Okay'
