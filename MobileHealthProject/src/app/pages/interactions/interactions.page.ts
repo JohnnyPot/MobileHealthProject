@@ -24,6 +24,8 @@ export class InteractionsPage implements OnInit {
 
       if (interactionJson.idGroup.hasOwnProperty('rxnormId')) {
 
+      }
+
     });
 
     return
