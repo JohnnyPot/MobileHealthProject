@@ -89,7 +89,8 @@ export class ApiStorageService {
                 if(userList) {
                     console.log("loading user list:");
                     console.log(JSON.stringify(userList));
-                    this.userList = userList.value;
+                    console.log(typeof(userList));
+                    this.userList = Object.values(userList.value);
                 } else {
                     console.log("no user list, using dummy one");
                 }
