@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import { InteractionModel } from "../models/interaction.model"
 import {FoodModel} from "../models/food.model";
 import {MedicineModel} from "../models/medicine.model";
+import {UserModel} from "../models/user.model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +20,8 @@ export class ApiStorageService {
   interactionLimit = '?_limit=5';
 
   constructor(private http: HttpClient) { }
+
+  // ----------------------------------- Food ------------------------------------------- //
 
 
   private foodList: FoodModel[] = [
@@ -49,12 +52,15 @@ export class ApiStorageService {
   //     })
   //   };
   // }
-  //
+
   // deleteRecipe(recipeId: string) {
   //   this.recipes = this.recipes.filter(recipe => {
   //     return recipe.id !== recipeId;
   //   });
   // }
+
+  // ----------------------------------- Meds ------------------------------------------- //
+
 
   getAllMeds(): MedicineModel[]{
     return [...this.medList];
@@ -92,6 +98,29 @@ export class ApiStorageService {
       rxnormId: 153165
     }
   ];
+
+  // ----------------------------------- Users ------------------------------------------- //
+
+  private userList: UserModel[] = [
+    {
+      id: 1,
+      name: 'Timos'
+    },
+    {
+      id: 2,
+      name: 'JohnnyPot'
+    },
+    {
+      id: 3,
+      name: 'Giannis'
+    }
+  ];
+
+  getAllUsers(): UserModel[]{
+    return [...this.userList];
+  }
+
+
 
   // ----------------------------------- HTTP Requests ------------------------------------------- //
 

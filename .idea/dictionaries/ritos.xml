@@ -2,11 +2,13 @@
   <dictionary name="ritos">
     <words>
       <w>fxnormid</w>
+      <w>giannis</w>
       <w>medkit</w>
       <w>meds</w>
       <w>rxcui</w>
       <w>rxnorm</w>
       <w>rxnormid</w>
+      <w>timos</w>
     </words>
   </dictionary>
 </component>

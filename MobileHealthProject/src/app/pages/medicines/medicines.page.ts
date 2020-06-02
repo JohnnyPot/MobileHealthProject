@@ -12,9 +12,9 @@ export class MedicinesPage implements OnInit {
 
   name: string
 
-
   constructor(private apiStorageService: ApiStorageService,
               private alertCtrl: AlertController) { }
+
 
   getListOfMed(): MedicineModel[]{
      return this.apiStorageService.getAllMeds();
