@@ -8,6 +8,7 @@ import {InteractionsPageRoutingModule} from './interactions-routing.module';
 
 import {InteractionsPage} from './interactions.page';
 import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
+import {InteractionItemComponent} from "../../components/interaction-item/interaction-item.component";
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
         InteractionsPageRoutingModule,
         MenuHeaderModule
     ],
-    declarations: [InteractionsPage]
+    declarations: [InteractionsPage, InteractionItemComponent]
 })
 export class InteractionsPageModule {
 }

@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label>{{interItem.drugs[0] + " - " + interItem.drugs[1]}}
+    <ion-item *ngFor="let des of interItem.descriptions">
+      {{des}}
+    </ion-item>
+  </ion-label>
+<!--  <ion-button (click)="onDelete()" fill="outline" color="danger" id="btn-cancel">-->
+<!--    <ion-icon slot="start" name="trash-outline"></ion-icon>-->
+<!--    Delete-->
+<!--  </ion-button>-->
+</ion-item>
