@@ -4,6 +4,11 @@
   <ion-list>
     <ion-item *ngFor="let user of this.getListOfUsers()" (click)="changeUser(user)">
       {{user.name}}
+      <ion-buttons slot="end" *ngIf="user.id!=0">
+        <ion-button (click)="onDeleteUser(user)">
+          <ion-icon name="trash" slot="icon-only"> </ion-icon
+          ></ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 

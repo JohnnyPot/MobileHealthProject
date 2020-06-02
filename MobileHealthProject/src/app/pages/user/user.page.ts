@@ -55,6 +55,9 @@ export class UserPage implements OnInit {
     this.apiStorageService.changeUser(user);
   }
 
+  onDeleteUser(user : UserModel) {
+    this.apiStorageService.deleteUser(user.id);
+  }
   ngOnInit() {
   }
 
