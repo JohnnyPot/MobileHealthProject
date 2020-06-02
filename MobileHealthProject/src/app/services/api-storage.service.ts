@@ -5,6 +5,8 @@ import {InteractionModel} from "../models/interaction.model"
 import {FoodModel} from "../models/food.model";
 import {MedicineModel} from "../models/medicine.model";
 import {UserModel} from "../models/user.model";
+import {StorageService} from "./storage.service";
+
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -19,12 +21,8 @@ export class ApiStorageService {
     interactionUrl: string = 'https://rxnav.nlm.nih.gov/REST/';
     interactionLimit = '?_limit=5';
 
-    constructor(private http: HttpClient) {
-    }
-
-    // ----------------------------------- Food ------------------------------------------- //
-
-
+    private activeUser: UserModel;
+    private userData : any;
     private foodList: FoodModel[] = [
         {
             id: 'r1',
@@ -40,6 +38,87 @@ export class ApiStorageService {
             ingredients: ['Pasta', 'Tomatoes', 'Salt', 'Garlic', 'Onion']
         }
     ];
+    private userList: UserModel[] = [
+        {
+            id: 0,
+            name: 'Guest'
+        },
+        {
+            id: 1,
+            name: 'Timos'
+        },
+        {
+            id: 2,
+            name: 'JohnnyPot'
+        },
+        {
+            id: 3,
+            name: 'Giannis'
+        }
+    ];
+    private medList: MedicineModel[] = [
+        {
+            name: 'ebastine',
+            rxnormId: 23796
+        },
+        {
+            name: 'lipitor',
+            rxnormId: 153165
+        }
+    ];
+
+    constructor(private http: HttpClient,
+                private storage: StorageService) {
+        this.loadData();
+    }
+
+    loadData() {
+        this.storage.getObject('lastActiveUser').then((user) =>
+        {
+            if(user){
+                console.log("loading last active user");
+                this.activeUser = user.value;
+            } else {
+                console.log("no last active user, setting guest");
+                this.activeUser = this.userList[0];
+            }
+        }).then(() =>
+        {
+            this.storage.getObject('userList').then((userList) =>
+            {
+                if(userList) {
+                    console.log("loading user list:");
+                    console.log(JSON.stringify(userList));
+                    this.userList = userList.value;
+                } else {
+                    console.log("no user list, using dummy one");
+                }
+            }).then(() =>
+            {
+                console.log("changing user to last active:" + JSON.stringify(this.activeUser));
+                this.changeUser(this.activeUser);
+            })
+        });
+
+    }
+
+    changeUser(user: UserModel){
+        this.storage.getObject("userData" + user.id.toString()).then((userData) =>
+        {
+            console.log("User has saved data:" + userData);
+            if (userData) {
+                this.userData = userData.value;
+                this.medList = this.userData.medList;
+                this.foodList = this.userData.foodList;
+            } else {
+                console.log("Using dummy data");
+            }
+        });
+    }
+
+
+
+    // ----------------------------------- Food ------------------------------------------- //
 
     getAllFood() {
         return [...this.foodList];
@@ -79,7 +158,11 @@ export class ApiStorageService {
         if (this.checkMed(med.rxnormId)) {
             this.medList.push(med);
         }
-
+        this.userData.medList = this.medList;
+        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(()=>
+        {
+            console.log('Saved medList');
+        });
     }
 
     deleteMed(recipeId: number) {
@@ -88,37 +171,11 @@ export class ApiStorageService {
         });
     }
 
-    private medList: MedicineModel[] = [
-        {
-            name: 'ebastine',
-            rxnormId: 23796
-        },
-        {
-            name: 'lipitor',
-            rxnormId: 153165
-        }
-    ];
+
 
     // ----------------------------------- Users ------------------------------------------- //
 
-    private userList: UserModel[] = [
-        {
-            id: 0,
-            name: 'Guest'
-        },
-        {
-            id: 1,
-            name: 'Timos'
-        },
-        {
-            id: 2,
-            name: 'JohnnyPot'
-        },
-        {
-            id: 3,
-            name: 'Giannis'
-        }
-    ];
+
 
     checkUser(name: string) {
         return this.userList.filter(user => {
@@ -135,6 +192,14 @@ export class ApiStorageService {
             }
             this.userList.push(user);
         }
+        this.storage.setObject('userList', this.userList).then(() =>
+        {
+            console.log("Saved userList");
+        });
+        this.storage.getObject('userList').then(list =>{
+            console.log(JSON.stringify(list));
+        })
+
     }
 
     deleteUser(id: number) {

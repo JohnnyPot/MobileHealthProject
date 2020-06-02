@@ -11,6 +11,7 @@ import {AddUserPopupPage} from "../add-user-popup/add-user-popup.page";
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage implements OnInit {
+  private listOfUsers;
 
   constructor(private apiStorageService: ApiStorageService,
               private alertCtrl: AlertController,
@@ -39,6 +40,10 @@ export class UserPage implements OnInit {
             alertEl.present();
           });
         }
+  }
+
+  ionViewWillEnter() {
+    this.listOfUsers = this.apiStorageService.getAllUsers();
   }
 
 
