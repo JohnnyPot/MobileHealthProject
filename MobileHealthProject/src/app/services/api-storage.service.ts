@@ -219,8 +219,15 @@ export class ApiStorageService {
         this.userList = this.userList.filter(user => {
             return user.id !== id;
         });
+        this.storage.removeItem("userData" + id.toString()).then(() =>
+        {
+            console.log("Removed user with id: " + id);
+        });
+        if (this.activeUser.id == id) {
+            this.activeUser = this.userList[0];
+            console.log("Active user changed to first in userList (should always be guest):" + JSON.stringify(this.activeUser));
+        }
     }
-
 
     getAllUsers(): UserModel[] {
         return [...this.userList];
