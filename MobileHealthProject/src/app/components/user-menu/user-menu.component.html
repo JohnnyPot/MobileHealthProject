@@ -1,0 +1,14 @@
+<ion-menu side="end" menuId="second" contentId="content1">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Users</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list *ngFor="let user of this.getUsers()">
+      <ion-menu-toggle menu="second" auto-hide="true">
+        <app-user-item [userItem]="user"></app-user-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
