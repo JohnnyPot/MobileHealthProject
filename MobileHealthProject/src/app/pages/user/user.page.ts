@@ -51,13 +51,18 @@ export class UserPage implements OnInit {
     return this.apiStorageService.getAllUsers();
   }
 
-  changeUser(user : UserModel) {
-    this.apiStorageService.changeUser(user);
-  }
+  // availabilityColor(user): string {
+  //   return user.id == this.apiStorageService.getActiveUserId() ? 'primary' : 'default';
+  // }
 
-  onDeleteUser(user : UserModel) {
-    this.apiStorageService.deleteUser(user.id);
-  }
+  // changeUser(user : UserModel) {
+  //   this.apiStorageService.changeUser(user);
+  // }
+
+  // onDeleteUser(user : UserModel) {
+  //   this.apiStorageService.deleteUser(user.id);
+  // }
+
   ngOnInit() {
   }
 

@@ -21,16 +21,19 @@ export class InteractionsPage implements OnInit {
 
 
     getInteractions() {
-        let interaction_list = '';
+
+        this.interactions = [];
+
+        let interaction_drugRxcuis = '';
 
         const medList = this.apiStorageService.getAllMeds();
 
         // let med of this.apiStorageService.getAllMeds()
         for (let i = 0; i < medList.length; i++) {
             if (i < medList.length - 1) {
-                interaction_list = interaction_list.concat(medList[i].rxnormId.toString() + '+')
+                interaction_drugRxcuis = interaction_drugRxcuis.concat(medList[i].rxnormId.toString() + '+')
             } else {
-                interaction_list = interaction_list.concat(medList[i].rxnormId.toString())
+                interaction_drugRxcuis = interaction_drugRxcuis.concat(medList[i].rxnormId.toString())
             }
 
             // console.log(medList[i].rxnormId.toString() + ' - edw');
@@ -38,7 +41,7 @@ export class InteractionsPage implements OnInit {
 
         // console.log(interaction_list + ' oli i lista');
 
-        this.apiStorageService.getInteractions(interaction_list).subscribe(interactionJson => {
+        this.apiStorageService.getInteractions(interaction_drugRxcuis).subscribe(interactionJson => {
 
             console.log(interactionJson);
 
@@ -53,29 +56,34 @@ export class InteractionsPage implements OnInit {
                     for (let InteractionType of InteractionTypeGroup.fullInteractionType) {
                         console.log('interaction Type: ' + InteractionType);
 
-                        let drugs = []
-                        let descriptions = []
+                        // let drugs = []
+                        // let descriptions = []
 
-                        for (let drug of InteractionType.minConcept) {
-                            console.log('Drug`s name: ' + drug.name);
-                            drugs.push(drug.name)
+                        // descriptions.push(InteractionType.interactionPair[0].description);
+                        // console.log('Description: ' + InteractionType.interactionPair.description);
+
+
+                        for (let interactionPair of InteractionType.interactionPair) {
+
+                            let drugs = [];
+
+                            for (let drug of interactionPair.interactionConcept) {
+                                console.log('Drug`s name: ' + drug.minConceptItem.name);
+                                drugs.push(drug.minConceptItem.name)
+                            }
+
+                            console.log('Description: ' + interactionPair.description);
+                            // descriptions.push(interactionPair.description)
+
+                            let interaction = {
+                                drugs: drugs,
+                                description: interactionPair.description
+                            }
+
+                            this.interactions.push(interaction);
+
                         }
 
-                        descriptions.push(InteractionType.interactionPair[0].description);
-                        console.log('Description: ' + InteractionType.interactionPair.description);
-
-
-                        // for (let interactionPair of InteractionType.interactionPair) {
-                        //     console.log('Description: ' + interactionPair.description);
-                        //     descriptions.push(interactionPair.description)
-                        // }
-
-                        let interaction = {
-                            drugs: drugs,
-                            descriptions: descriptions
-                        }
-
-                        this.interactions.push(interaction);
                     }
                 }
 
@@ -85,7 +93,6 @@ export class InteractionsPage implements OnInit {
 
         });
 
-        // return
     }
 
     ngOnInit() {

@@ -21,8 +21,8 @@ export class ApiStorageService {
     interactionUrl: string = 'https://rxnav.nlm.nih.gov/REST/';
     interactionLimit = '?_limit=5';
 
-    private activeUser: UserModel;
-    private userData : any;
+    private activeUser: UserModel = {id: 0, name: 'Guest'};
+    private userData: any;
     private foodList: FoodModel[] = [
         {
             id: 'r1',
@@ -76,29 +76,25 @@ export class ApiStorageService {
     }
 
     loadData() {
-        this.storage.getObject('lastActiveUser').then((user) =>
-        {
-            if(user){
+        this.storage.getObject('lastActiveUser').then((user) => {
+            if (user) {
                 console.log("loading last active user");
                 this.activeUser = user.value;
             } else {
                 console.log("no last active user, setting guest");
                 this.activeUser = this.userList[0];
             }
-        }).then(() =>
-        {
-            this.storage.getObject('userList').then((userList) =>
-            {
-                if(userList) {
+        }).then(() => {
+            this.storage.getObject('userList').then((userList) => {
+                if (userList) {
                     console.log("loading user list:");
                     console.log(JSON.stringify(userList));
-                    console.log(typeof(userList));
+                    console.log(typeof (userList));
                     this.userList = Object.values(userList);
                 } else {
                     console.log("no user list, using dummy one");
                 }
-            }).then(() =>
-            {
+            }).then(() => {
                 console.log("changing user to last active:" + JSON.stringify(this.activeUser));
                 this.changeUser(this.activeUser);
             })
@@ -106,10 +102,18 @@ export class ApiStorageService {
 
     }
 
-    changeUser(user: UserModel){
+    getActiveUserId() {
+        return this.activeUser.id;
+    }
+
+    changeUser(user: UserModel) {
+
+        if (user.id == this.activeUser.id) {
+            return;
+        }
+
         this.activeUser = user;
-        this.storage.getObject("userData" + user.id.toString()).then((userData) =>
-        {
+        this.storage.getObject("userData" + user.id.toString()).then((userData) => {
             console.log("Changing user. User '" + user.name + "'has saved data:");
             console.log(JSON.stringify(userData));
 
@@ -127,7 +131,6 @@ export class ApiStorageService {
             }
         });
     }
-
 
 
     // ----------------------------------- Food ------------------------------------------- //
@@ -171,8 +174,7 @@ export class ApiStorageService {
             this.medList.push(med);
         }
         this.userData.medList = this.medList;
-        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(()=>
-        {
+        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
             console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
             console.log(JSON.stringify(this.userData));
         });
@@ -185,9 +187,7 @@ export class ApiStorageService {
     }
 
 
-
     // ----------------------------------- Users ------------------------------------------- //
-
 
 
     checkUser(name: string) {
@@ -205,11 +205,10 @@ export class ApiStorageService {
             }
             this.userList.push(user);
         }
-        this.storage.setObject('userList', this.userList).then(() =>
-        {
+        this.storage.setObject('userList', this.userList).then(() => {
             console.log("Saved userList");
         });
-        this.storage.getObject('userList').then(list =>{
+        this.storage.getObject('userList').then(list => {
             console.log(JSON.stringify(list));
         })
 
@@ -219,8 +218,7 @@ export class ApiStorageService {
         this.userList = this.userList.filter(user => {
             return user.id !== id;
         });
-        this.storage.removeItem("userData" + id.toString()).then(() =>
-        {
+        this.storage.removeItem("userData" + id.toString()).then(() => {
             console.log("Removed user with id: " + id);
         });
         if (this.activeUser.id == id) {
@@ -232,7 +230,6 @@ export class ApiStorageService {
     getAllUsers(): UserModel[] {
         return [...this.userList];
     }
-
 
     // ----------------------------------- HTTP Requests ------------------------------------------- //
 

@@ -1,4 +1,4 @@
 export interface InteractionModel {
     drugs: string[];
-    descriptions: string[]
+    description: string
 }

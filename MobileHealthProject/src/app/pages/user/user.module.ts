@@ -11,6 +11,7 @@ import {MedItemComponent} from "../../components/med-item/med-item.component";
 import {MenuHeaderComponent} from "../../components/menu-header/menu-header.component";
 import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
 import {AddUserPopupPage} from "../add-user-popup/add-user-popup.page";
+import {UserItemModule} from "../../modules/user-item/user-item.module";
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import {AddUserPopupPage} from "../add-user-popup/add-user-popup.page";
         FormsModule,
         IonicModule,
         UserPageRoutingModule,
-        MenuHeaderModule
+        MenuHeaderModule,
+        UserItemModule
     ],
     declarations: [UserPage]
 })
