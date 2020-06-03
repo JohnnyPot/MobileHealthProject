@@ -1,16 +1,28 @@
-<app-menu-header [header_title]= "'Interactions'"></app-menu-header>
+<app-menu-header [header_title]="'Interactions'"></app-menu-header>
 
 <ion-content>
-    <ion-button (click)="getInteractions()">press me</ion-button>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-item *ngIf="!interactions || interactions.length <= 0">
+                    No interactions
+                </ion-item>
 
-    <ion-list >
-        <app-interaction-item
-                *ngFor="let inter of interactions"
-                [interItem]="inter">
-        </app-interaction-item>
+                <ion-list *ngIf="interactions.length > 0">
+                    <app-interaction-item
+                            *ngFor="let inter of interactions"
+                            [interItem]="inter">
+                    </app-interaction-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row style="position:fixed; bottom:30px; right: 30px">
+            <ion-col>
+                <ion-button (click)="getInteractions()">
+                    <ion-icon name="refresh"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-        <ion-item *ngIf="!interactions || interactions.length <= 0">
-            No items.
-        </ion-item>
-    </ion-list>
 </ion-content>

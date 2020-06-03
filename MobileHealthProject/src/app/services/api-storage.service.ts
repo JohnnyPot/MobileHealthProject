@@ -108,9 +108,9 @@ export class ApiStorageService {
 
     changeUser(user: UserModel) {
 
-        if (user.id == this.activeUser.id) {
-            return;
-        }
+        // if (user.id == this.activeUser.id) {
+        //     return;
+        // }
 
         this.activeUser = user;
         this.storage.getObject("userData" + user.id.toString()).then((userData) => {

@@ -10,6 +10,16 @@ export class InteractionItemComponent implements OnInit {
 
   @Input() interItem: InteractionModel;
 
+  hideme: boolean = false;
+
+  getColor(){
+    return this.hideme ? 'primary' : '';
+  }
+
+  hideFunc(){
+    this.hideme = !this.hideme;
+  }
+
   constructor() { }
 
   ngOnInit() {}

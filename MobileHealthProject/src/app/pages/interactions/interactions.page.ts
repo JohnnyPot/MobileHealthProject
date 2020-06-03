@@ -18,8 +18,6 @@ export class InteractionsPage implements OnInit {
 
     interactions: InteractionModel[] = [];
 
-
-
     getInteractions() {
 
         this.interactions = [];
@@ -56,33 +54,27 @@ export class InteractionsPage implements OnInit {
                     for (let InteractionType of InteractionTypeGroup.fullInteractionType) {
                         console.log('interaction Type: ' + InteractionType);
 
-                        // let drugs = []
-                        // let descriptions = []
+                        let drugs = []
 
-                        // descriptions.push(InteractionType.interactionPair[0].description);
-                        // console.log('Description: ' + InteractionType.interactionPair.description);
-
-
-                        for (let interactionPair of InteractionType.interactionPair) {
-
-                            let drugs = [];
-
-                            for (let drug of interactionPair.interactionConcept) {
-                                console.log('Drug`s name: ' + drug.minConceptItem.name);
-                                drugs.push(drug.minConceptItem.name)
-                            }
-
-                            console.log('Description: ' + interactionPair.description);
-                            // descriptions.push(interactionPair.description)
-
-                            let interaction = {
-                                drugs: drugs,
-                                description: interactionPair.description
-                            }
-
-                            this.interactions.push(interaction);
-
+                        for (let drug of InteractionType.minConcept) {
+                            console.log('Drug`s name: ' + drug.name);
+                            drugs.push(drug.name)
                         }
+
+                        // for (let drug of InteractionType.interactionPair[0].interactionConcept) {
+                        //     console.log('Drug`s name: ' + drug.minConceptItem.name);
+                        //     drugs.push(drug.minConceptItem.name)
+                        // }
+
+                        console.log('Description: ' + InteractionType.interactionPair.description);
+
+
+                        let interaction = {
+                            drugs: drugs,
+                            description: InteractionType.interactionPair[0].description
+                        }
+
+                        this.interactions.push(interaction);
 
                     }
                 }
@@ -96,6 +88,7 @@ export class InteractionsPage implements OnInit {
     }
 
     ngOnInit() {
+        this.getInteractions();
     }
 
 }
