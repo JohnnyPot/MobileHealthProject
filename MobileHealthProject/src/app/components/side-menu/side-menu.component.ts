@@ -39,11 +39,11 @@ export class SideMenuComponent implements OnInit {
                     url: "/food",
                     icon: "pizza"
                 },
-                {
-                    title: "Users",
-                    url: "/users",
-                    icon: "people"
-                },
+                // {
+                //     title: "Users",
+                //     url: "/users",
+                //     icon: "people"
+                // },
                 {
                     title: "About",
                     url: "/about",

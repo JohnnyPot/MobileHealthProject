@@ -18,12 +18,14 @@ import {MenuHeaderComponent} from "./components/menu-header/menu-header.componen
 import {MenuHeaderModule} from "./modules/menu-header/menu-header.module";
 import {AddUserPopupPage} from "./pages/add-user-popup/add-user-popup.page";
 import {AddUserPopupPageModule} from "./pages/add-user-popup/add-user-popup.module";
+import {UserMenuComponent} from "./components/user-menu/user-menu.component";
+import {UserItemModule} from "./modules/user-item/user-item.module";
 
 
 @NgModule({
-  declarations: [AppComponent, SideMenuComponent],
+  declarations: [AppComponent, SideMenuComponent, UserMenuComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule, AddUserPopupPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule, AddUserPopupPageModule, UserItemModule],
   providers: [
     StatusBar,
     SplashScreen,
