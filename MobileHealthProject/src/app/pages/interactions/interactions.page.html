@@ -14,7 +14,13 @@
         </ion-row>
 
         <ion-row>
+            <ion-searchbar placeholder="Filter Interactions"></ion-searchbar>
+        </ion-row>
+
+        <ion-row>
             <ion-card style="width: 100%">
+<!--                <ion-searchbar placeholder="Filter Interactions"></ion-searchbar>-->
+
                 <ion-card-content class="ion-no-padding">
                     <ion-item *ngIf="!interactions || interactions.length <= 0">
                         No interactions
@@ -39,9 +45,9 @@
         <!--        </ion-row>-->
 
         <ion-row style="position: fixed; bottom: 70px;">
-                <ion-button (click)="getInteractions()" style="position:fixed; right: 30px">
-                    <ion-icon name="refresh"></ion-icon>
-                </ion-button>
+            <ion-button (click)="getInteractions()" style="position:fixed; right: 30px">
+                <ion-icon name="refresh"></ion-icon>
+            </ion-button>
         </ion-row>
     </ion-grid>
 
