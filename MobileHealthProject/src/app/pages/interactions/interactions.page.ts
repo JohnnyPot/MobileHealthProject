@@ -54,7 +54,7 @@ export class InteractionsPage implements OnInit {
         if(this.medButtonFlags[name]){
             return 'solid';
         }else{
-            return 'outline';
+            return 'clear';
         }
     }
 
