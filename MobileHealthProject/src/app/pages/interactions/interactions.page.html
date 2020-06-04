@@ -3,7 +3,7 @@
 <ion-content>
     <ion-grid>
         <ion-row>
-            <ion-card>
+            <ion-card style="width: 100%">
                 <ion-card-content>
                     <ion-button *ngFor="let med of this.getListOfMeds()">{{med.name}}</ion-button>
                 </ion-card-content>
@@ -13,27 +13,36 @@
             </ion-card>
         </ion-row>
 
-            <ion-row>
-                <ion-col>
+        <ion-row>
+            <ion-card style="width: 100%">
+                <ion-card-content class="ion-no-padding">
                     <ion-item *ngIf="!interactions || interactions.length <= 0">
                         No interactions
                     </ion-item>
 
-                    <ion-list *ngIf="interactions.length > 0">
+                    <ion-list *ngIf="interactions.length > 0" style="max-height: 370px; overflow-y: scroll;">
                         <app-interaction-item
                                 *ngFor="let inter of interactions"
                                 [interItem]="inter">
                         </app-interaction-item>
                     </ion-list>
-                </ion-col>
-            </ion-row>
-            <ion-row style="position:fixed; bottom:30px; right: 30px">
-                <ion-col>
-                    <ion-button (click)="getInteractions()">
-                        <ion-icon name="refresh"></ion-icon>
-                    </ion-button>
-                </ion-col>
-            </ion-row>
+                </ion-card-content>
+            </ion-card>
+        </ion-row>
+
+        <!--        <ion-row style="position:fixed; bottom:30px; right: 30px">-->
+        <!--            <ion-col>-->
+        <!--                <ion-button (click)="getInteractions()">-->
+        <!--                    <ion-icon name="refresh"></ion-icon>-->
+        <!--                </ion-button>-->
+        <!--            </ion-col>-->
+        <!--        </ion-row>-->
+
+        <ion-row style="position: fixed; bottom: 70px;">
+                <ion-button (click)="getInteractions()" style="position:fixed; right: 30px">
+                    <ion-icon name="refresh"></ion-icon>
+                </ion-button>
+        </ion-row>
     </ion-grid>
 
 </ion-content>
