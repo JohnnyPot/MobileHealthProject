@@ -3,26 +3,37 @@
 <ion-content>
     <ion-grid>
         <ion-row>
-            <ion-col>
-                <ion-item *ngIf="!interactions || interactions.length <= 0">
-                    No interactions
-                </ion-item>
+            <ion-card>
+                <ion-card-content>
+                    <ion-button *ngFor="let med of this.getListOfMeds()">{{med.name}}</ion-button>
+                </ion-card-content>
+                <ion-card-header>
+                    Choose one or more of the active substances above for which you would like to find the interactions
+                </ion-card-header>
+            </ion-card>
+        </ion-row>
 
-                <ion-list *ngIf="interactions.length > 0">
-                    <app-interaction-item
-                            *ngFor="let inter of interactions"
-                            [interItem]="inter">
-                    </app-interaction-item>
-                </ion-list>
-            </ion-col>
-        </ion-row>
-        <ion-row style="position:fixed; bottom:30px; right: 30px">
-            <ion-col>
-                <ion-button (click)="getInteractions()">
-                    <ion-icon name="refresh"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item *ngIf="!interactions || interactions.length <= 0">
+                        No interactions
+                    </ion-item>
+
+                    <ion-list *ngIf="interactions.length > 0">
+                        <app-interaction-item
+                                *ngFor="let inter of interactions"
+                                [interItem]="inter">
+                        </app-interaction-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row style="position:fixed; bottom:30px; right: 30px">
+                <ion-col>
+                    <ion-button (click)="getInteractions()">
+                        <ion-icon name="refresh"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
     </ion-grid>
 
 </ion-content>

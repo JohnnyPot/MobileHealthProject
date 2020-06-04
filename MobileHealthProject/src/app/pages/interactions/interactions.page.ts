@@ -18,12 +18,41 @@ export class InteractionsPage implements OnInit {
 
     interactions: InteractionModel[] = [];
 
+    // getGridOfMeds() {
+    //     const numberOfCols = 3;
+    //     let rows = [];
+    //     let curRow = [];
+    //     let curCol = 0;
+    //
+    //     for(let med of this.apiStorageService.getAllMeds()){
+    //
+    //         if(curCol == numberOfCols) {
+    //             console.log(curRow);
+    //             rows.push(curRow);
+    //             curRow = [];
+    //             curCol = 0;
+    //         }
+    //
+    //         console.log(med.name);
+    //         curRow.push(med);
+    //         curCol++;
+    //     }
+    //
+    //     if(curRow.length > 0){
+    //         rows.push(curRow);
+    //     }
+    //
+    //     return rows;
+    // }
+
+    getListOfMeds(){
+        return this.apiStorageService.getAllMeds();
+    }
+
     getInteractions() {
 
         this.interactions = [];
-
         let interaction_drugRxcuis = '';
-
         const medList = this.apiStorageService.getAllMeds();
 
         // let med of this.apiStorageService.getAllMeds()
@@ -33,10 +62,8 @@ export class InteractionsPage implements OnInit {
             } else {
                 interaction_drugRxcuis = interaction_drugRxcuis.concat(medList[i].rxnormId.toString())
             }
-
             // console.log(medList[i].rxnormId.toString() + ' - edw');
         }
-
         // console.log(interaction_list + ' oli i lista');
 
         this.apiStorageService.getInteractions(interaction_drugRxcuis).subscribe(interactionJson => {
@@ -45,7 +72,6 @@ export class InteractionsPage implements OnInit {
 
             if (interactionJson.hasOwnProperty('fullInteractionTypeGroup')) {
                 // console.log('Bravo');
-
                 // console.log(interactionJson.fullInteractionTypeGroup.fullInteractionType)
 
                 for (let InteractionTypeGroup of interactionJson.fullInteractionTypeGroup) {
@@ -68,21 +94,17 @@ export class InteractionsPage implements OnInit {
 
                         console.log('Description: ' + InteractionType.interactionPair.description);
 
-
                         let interaction = {
                             drugs: drugs,
                             description: InteractionType.interactionPair[0].description
                         }
 
                         this.interactions.push(interaction);
-
                     }
                 }
-
             } else {
                 console.log('no interactions');
             }
-
         });
 
     }
