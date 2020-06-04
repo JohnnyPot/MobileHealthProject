@@ -17,6 +17,7 @@ export class InteractionsPage implements OnInit {
     }
 
     interactions: InteractionModel[] = [];
+    medButtonFlags: {} = {};
 
     // getGridOfMeds() {
     //     const numberOfCols = 3;
@@ -44,6 +45,25 @@ export class InteractionsPage implements OnInit {
     //
     //     return rows;
     // }
+
+    changeButtonVal(name: string) {
+        this.medButtonFlags[name] = !this.medButtonFlags[name];
+    }
+
+    getButtonVal(name: string): string {
+        if(this.medButtonFlags[name]){
+            return 'solid';
+        }else{
+            return 'outline';
+        }
+    }
+
+
+    initButtons(){
+        for(let med of this.getListOfMeds()){
+            this.medButtonFlags[med.name] = true;
+        }
+    }
 
     getListOfMeds(){
         return this.apiStorageService.getAllMeds();
@@ -110,6 +130,7 @@ export class InteractionsPage implements OnInit {
     }
 
     ngOnInit() {
+        this.initButtons();
         this.getInteractions();
     }
 
