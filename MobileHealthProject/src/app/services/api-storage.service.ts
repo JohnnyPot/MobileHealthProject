@@ -245,9 +245,14 @@ export class ApiStorageService {
     //   return this.http.get<MedicineModel>(`${this.interactionUrl}rxcui.json?name=${name}`);
     // }
 
-    // Get Interactions
+    // Get med's rxcui code
     getRxcui(name: string): Observable<any> {
         return this.http.get(`${this.interactionUrl}rxcui.json?name=${name}`);
+    }
+
+    // Get med's rxcui code
+    getSuggestionsForMedName(name: string): Observable<any> {
+        return this.http.get(`${this.interactionUrl}spellingsuggestions.json?name=${name}`);
     }
 
     // Get Interactions

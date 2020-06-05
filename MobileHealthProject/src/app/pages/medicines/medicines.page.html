@@ -1,17 +1,28 @@
 <app-menu-header [header_title]="'Medicines'"></app-menu-header>
 <ion-content style="max-height: 100vh">
 
-    <ion-card style="max-height: 30vh">
+    <ion-card style="max-height: 50vh">
+        <!--    <ion-card>-->
         <ion-card-header>
             <ion-card-title>Add a new medicine on your list</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
+
             <ion-item>
                 <ion-label position="floating">Med's Name</ion-label>
-                <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
+                <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>
                 <!--            <ion-button type="submit" (click)="onSubmit()">Submit</ion-button>-->
             </ion-item>
+
+            <ion-card *ngIf="name !== '' && sugs.length > 0" class="ion-no-padding">
+                <ion-list style="max-height: 20vh; width: 100%; overflow-y: scroll;">
+                    <ion-item *ngFor="let sug of sugs" (click)="onUpdate(sug)">
+                        {{sug}}
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+
             <div class="ion-margin-vertical ion-text-right">
                 <ion-button (click)="onClear()" fill="outline" color="danger" id="btn-cancel">
                     <ion-icon slot="start" name="trash-outline"></ion-icon>
@@ -22,12 +33,18 @@
                     Search
                 </ion-button>
             </div>
+
+
         </ion-card-content>
     </ion-card>
 
+<!--    <ion-searchbar placeholder="Search for a medicine"-->
+<!--                   type="text" name="name" [(ngModel)]="name">-->
+<!--    </ion-searchbar>-->
+
     <!--    <ion-card class="ion-padding">-->
     <ion-card>
-        <ion-list style="max-height: 59vh; overflow-y: scroll;">
+        <ion-list style="max-height: 50vh; overflow-y: scroll;">
             <app-med-item
                     *ngFor="let med of this.getListOfMed()"
                     [medItem]="med">
