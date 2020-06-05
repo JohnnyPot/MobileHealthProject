@@ -34,6 +34,11 @@ export class MedicinesPage implements OnInit {
     }
 
     onSubmit(): void {
+
+        if(this.name === ''){
+            return;
+        }
+
         this.apiStorageService.getRxcui(this.name).subscribe(med => {
                 if (med.idGroup.hasOwnProperty('rxnormId')) {
 
