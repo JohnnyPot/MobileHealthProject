@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ApiStorageService} from "../../services/api-storage.service";
 import {AlertController} from "@ionic/angular";
 import {MedicineModel} from "../../models/medicine.model";
-import {suggestionModel} from "../../models/suggestion.model";
 
 @Component({
     selector: 'app-medicines',

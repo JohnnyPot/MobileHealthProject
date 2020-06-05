@@ -1,27 +1,33 @@
 <ion-header>
-  <ion-buttons>
-    <ion-button (click)="dismiss()">
-      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <!--    <ion-button (click)="dismiss()" id="btn-cancel">-->
-  <!--        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>-->
-  <!--    </ion-button>-->
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-title>Add a new User</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Add a new User</ion-card-title>
+      <ion-card-title>Fill the form</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">User Name</ion-label>
+        <ion-label position="floating">Name</ion-label>
         <ion-input type="text" name="name" [(ngModel)]="user_name"></ion-input>
         <!--            <ion-button type="submit" (click)="onSubmit()">Submit</ion-button>-->
       </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Age</ion-label>
+        <ion-input type="text" name="age"></ion-input>
+      </ion-item>
+
       <div class="ion-margin-vertical ion-text-right">
         <ion-button (click)="onClear()" fill="outline" color="danger" id="btn-cancel">
           <ion-icon slot="start" name="trash-outline"></ion-icon>

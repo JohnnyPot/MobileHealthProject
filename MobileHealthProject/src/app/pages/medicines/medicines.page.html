@@ -1,7 +1,7 @@
 <app-menu-header [header_title]="'Medicines'"></app-menu-header>
 <ion-content style="max-height: 100vh">
 
-    <ion-card style="max-height: 50vh">
+    <ion-card style="max-height: 60vh">
         <!--    <ion-card>-->
         <ion-card-header>
             <ion-card-title>Add a new medicine on your list</ion-card-title>
@@ -16,11 +16,16 @@
             </ion-item>
 
             <ion-card *ngIf="name !== '' && sugs.length > 0" class="ion-no-padding">
-                <ion-list style="max-height: 20vh; width: 100%; overflow-y: scroll;">
-                    <ion-item *ngFor="let sug of sugs" (click)="onUpdate(sug)">
-                        {{sug}}
-                    </ion-item>
-                </ion-list>
+                <ion-card-header>
+                    <ion-text>Maybe you mean</ion-text>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-list style="max-height: 20vh; width: 100%; overflow-y: scroll;">
+                        <ion-item *ngFor="let sug of sugs" (click)="onUpdate(sug)">
+                            {{sug}}
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
             </ion-card>
 
             <div class="ion-margin-vertical ion-text-right">
@@ -30,7 +35,7 @@
                 </ion-button>
                 <ion-button (click)="onSubmit()" id="btn-confirm">
                     <ion-icon slot="start" name="add-outline"></ion-icon>
-                    Search
+                    Add
                 </ion-button>
             </div>
 
@@ -44,7 +49,7 @@
 
     <!--    <ion-card class="ion-padding">-->
     <ion-card>
-        <ion-list style="max-height: 50vh; overflow-y: scroll;">
+        <ion-list style="max-height: 59vh; overflow-y: scroll;">
             <app-med-item
                     *ngFor="let med of this.getListOfMed()"
                     [medItem]="med">
