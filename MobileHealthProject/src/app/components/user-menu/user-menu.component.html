@@ -1,14 +1,20 @@
 <ion-menu side="end" menuId="second" contentId="content1">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Users</ion-title>
+      <ion-title slot="start">Users</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list *ngFor="let user of this.getUsers()">
+    <ion-list *ngFor="let user of this.getUsers()" style="max-height: 90vh; overflow-y: scroll;">
       <ion-menu-toggle menu="second" auto-hide="true">
         <app-user-item [userItem]="user"></app-user-item>
       </ion-menu-toggle>
     </ion-list>
+
+    <div style="position: fixed; right:30%; bottom: 5px;">
+      <ion-button (click)="openAddModal()" >
+        Add User
+      </ion-button>
+    </div>
   </ion-content>
 </ion-menu>

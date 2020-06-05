@@ -1,7 +1,7 @@
-<app-menu-header [header_title]= "'Medicines'"></app-menu-header>
-<ion-content>
+<app-menu-header [header_title]="'Medicines'"></app-menu-header>
+<ion-content style="max-height: 100vh">
 
-    <ion-card>
+    <ion-card style="max-height: 30vh">
         <ion-card-header>
             <ion-card-title>Add a new medicine on your list</ion-card-title>
         </ion-card-header>
@@ -25,12 +25,14 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-list>
-        <app-med-item
-                *ngFor="let med of this.getListOfMed()"
-                [medItem]="med">
-        </app-med-item>
-    </ion-list>
-
+    <!--    <ion-card class="ion-padding">-->
+    <ion-card>
+        <ion-list style="max-height: 59vh; overflow-y: scroll;">
+            <app-med-item
+                    *ngFor="let med of this.getListOfMed()"
+                    [medItem]="med">
+            </app-med-item>
+        </ion-list>
+    </ion-card>
 
 </ion-content>

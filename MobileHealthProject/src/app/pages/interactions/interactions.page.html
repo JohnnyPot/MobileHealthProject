@@ -28,13 +28,13 @@
                 <!--                    <ion-searchbar placeholder="Filter Interactions"></ion-searchbar>-->
                 <!--                </ion-card-header>-->
                 <ion-card-content class="ion-no-padding">
-                    <ion-item *ngIf="!getInterList() || getInterList().length <= 0">
+                    <ion-item *ngIf="!getInterFilteredList() || getInterFilteredList().length <= 0">
                         No interactions
                     </ion-item>
 
-                    <ion-list *ngIf="getInterList().length > 0" style="max-height: 370px; overflow-y: scroll;">
+                    <ion-list *ngIf="getInterFilteredList().length > 0" style="max-height: 370px; overflow-y: scroll;">
                         <app-interaction-item
-                                *ngFor="let inter of getInterList()"
+                                *ngFor="let inter of getInterFilteredList()"
                                 [interItem]="inter">
                         </app-interaction-item>
                     </ion-list>
@@ -42,19 +42,6 @@
             </ion-card>
         </ion-row>
 
-        <!--        <ion-row style="position:fixed; bottom:30px; right: 30px">-->
-        <!--            <ion-col>-->
-        <!--                <ion-button (click)="getInteractions()">-->
-        <!--                    <ion-icon name="refresh"></ion-icon>-->
-        <!--                </ion-button>-->
-        <!--            </ion-col>-->
-        <!--        </ion-row>-->
-
-        <ion-row style="position: fixed; bottom: 70px;">
-            <ion-button (click)="getInterList()" style="position:fixed; right: 30px">
-                <ion-icon name="refresh"></ion-icon>
-            </ion-button>
-        </ion-row>
     </ion-grid>
 
 </ion-content>

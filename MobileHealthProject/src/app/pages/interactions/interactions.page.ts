@@ -19,32 +19,7 @@ export class InteractionsPage implements OnInit {
     // interList: InteractionModel[] = [];
     medButtonFlags: {} = {};
 
-    // getGridOfMeds() {
-    //     const numberOfCols = 3;
-    //     let rows = [];
-    //     let curRow = [];
-    //     let curCol = 0;
-    //
-    //     for(let med of this.apiStorageService.getAllMeds()){
-    //
-    //         if(curCol == numberOfCols) {
-    //             console.log(curRow);
-    //             rows.push(curRow);
-    //             curRow = [];
-    //             curCol = 0;
-    //         }
-    //
-    //         console.log(med.name);
-    //         curRow.push(med);
-    //         curCol++;
-    //     }
-    //
-    //     if(curRow.length > 0){
-    //         rows.push(curRow);
-    //     }
-    //
-    //     return rows;
-    // }
+
 
     changeButtonVal(name: string) {
         this.medButtonFlags[name] = !this.medButtonFlags[name];
@@ -56,6 +31,19 @@ export class InteractionsPage implements OnInit {
         }else{
             return 'clear';
         }
+    }
+
+    getActiveButtonsNames(): string[] {
+
+        let activeBtns: string[] = []
+
+        for(let name in this.medButtonFlags){
+            if(this.medButtonFlags[name] == true){
+                activeBtns.push(name);
+            }
+        }
+
+        return activeBtns;
     }
 
 
@@ -73,9 +61,40 @@ export class InteractionsPage implements OnInit {
         return this.apiStorageService.getInterList();
     }
 
+    getInterFilteredList() {
+        return this.apiStorageService.getInterFilteredList(this.getActiveButtonsNames());
+    }
+
     ngOnInit() {
         this.initButtons();
         // this.interList = this.apiStorageService.getInterList();
     }
 
 }
+
+// getGridOfMeds() {
+//     const numberOfCols = 3;
+//     let rows = [];
+//     let curRow = [];
+//     let curCol = 0;
+//
+//     for(let med of this.apiStorageService.getAllMeds()){
+//
+//         if(curCol == numberOfCols) {
+//             console.log(curRow);
+//             rows.push(curRow);
+//             curRow = [];
+//             curCol = 0;
+//         }
+//
+//         console.log(med.name);
+//         curRow.push(med);
+//         curCol++;
+//     }
+//
+//     if(curRow.length > 0){
+//         rows.push(curRow);
+//     }
+//
+//     return rows;
+// }

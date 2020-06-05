@@ -255,6 +255,34 @@ export class ApiStorageService {
         return this.http.get(`${this.interactionUrl}interaction/list.json?rxcuis=${listOfRxcui}`);
     }
 
+    getInterFilteredList(names: string[]) {
+
+            let filteredInters: InteractionModel[] = [];
+
+            for(let inter of this.interList){
+
+                if(names.length == 1){
+                    if(names.some((med) => {
+                        return med.toUpperCase() === inter.drugs[0].toUpperCase() ||
+                            med.toUpperCase() === inter.drugs[1].toUpperCase();
+                    })){
+                        filteredInters.push(inter);
+                    }
+                }else{
+                    if(names.some((med) => {
+                        return med.toUpperCase() === inter.drugs[0].toUpperCase();
+                    }) && names.some((med) => {
+                        return med.toUpperCase() === inter.drugs[1].toUpperCase();
+                    })){
+                        filteredInters.push(inter);
+                    }
+                }
+
+            }
+
+        return filteredInters;
+    }
+
     getInterList() {
         return this.interList;
     }
