@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FoodModel} from "../../models/food.model";
 import {MedicineModel} from "../../models/medicine.model";
-import {AlertController} from "@ionic/angular";
+import {AlertController, ModalController} from "@ionic/angular";
 import {ApiStorageService} from "../../services/api-storage.service";
+import {AddUserPopupPage} from "../../pages/add-user-popup/add-user-popup.page";
+import {MedicinePopupDetailsPage} from "../../pages/medicine-popup-details/medicine-popup-details.page";
 
 
 @Component({
@@ -15,7 +17,15 @@ export class MedItemComponent implements OnInit {
   @Input() medItem: MedicineModel;
 
   constructor(private apiStorageService: ApiStorageService,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController,
+              public modalController: ModalController) { }
+
+  async openEditModal() {
+    const modal = await this.modalController.create({
+      component: MedicinePopupDetailsPage
+    });
+    return await modal.present();
+  }
 
   onDelete() {
     this.alertCtrl.create({

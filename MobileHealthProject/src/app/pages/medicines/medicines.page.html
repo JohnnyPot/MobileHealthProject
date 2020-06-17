@@ -49,6 +49,11 @@
 
     <!--    <ion-card class="ion-padding">-->
     <ion-card>
+
+        <ion-item *ngIf="this.getListOfMed().length <= 0" lines="none">
+            Empty Med List
+        </ion-item>
+
         <ion-list style="max-height: 59vh; overflow-y: scroll;">
             <app-med-item
                     *ngFor="let med of this.getListOfMed()"

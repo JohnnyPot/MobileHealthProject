@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'add-user-popup',
     loadChildren: () => import('./pages/add-user-popup/add-user-popup.module').then( m => m.AddUserPopupPageModule)
+  },
+  {
+    path: 'medicine-popup-details',
+    loadChildren: () => import('./pages/medicine-popup-details/medicine-popup-details.module').then( m => m.MedicinePopupDetailsPageModule)
   }
 ];
 

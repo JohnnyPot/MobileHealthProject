@@ -14,12 +14,13 @@ import { UsersPopupPageModule } from "./pages/users-popup/users-popup.module";
 import {AddUserPopupPageModule} from "./pages/add-user-popup/add-user-popup.module";
 import {UserMenuComponent} from "./components/user-menu/user-menu.component";
 import {UserItemModule} from "./modules/user-item/user-item.module";
+import {MedicinePopupDetailsPageModule} from "./pages/medicine-popup-details/medicine-popup-details.module";
 
 
 @NgModule({
   declarations: [AppComponent, SideMenuComponent, UserMenuComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule, AddUserPopupPageModule, UserItemModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UsersPopupPageModule, AddUserPopupPageModule, UserItemModule, MedicinePopupDetailsPageModule],
   providers: [
     StatusBar,
     SplashScreen,

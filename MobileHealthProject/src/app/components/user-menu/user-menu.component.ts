@@ -17,7 +17,7 @@ export class UserMenuComponent implements OnInit {
 
   async openAddModal() {
     const modal = await this.modalController.create({
-      component: AddUserPopupPage
+      component: AddUserPopupPage,
     });
     return await modal.present();
   }
