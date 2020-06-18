@@ -30,12 +30,12 @@ export class SideMenuComponent implements OnInit {
                     icon: "medkit"
                 },
                 {
-                    title: "Interactions",
+                    title: "Drug-Drug Interactions",
                     url: "/interactions",
                     icon: "flask"
                 },
                 {
-                    title: "Foods",
+                    title: "Food-Drug Interactions",
                     url: "/food",
                     icon: "pizza"
                 },

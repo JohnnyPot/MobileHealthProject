@@ -1,20 +1,62 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-button (click)="dismiss()" id="btn-cancel">
-        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-      </ion-button>
-      <ion-title>Edit Personal Information</ion-title>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-button (click)="dismiss()" id="btn-cancel">
+                <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-title>Add Med's Information</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-label>
-        Details
-      </ion-label>
-    </ion-item>
-  </ion-card>
+
+    <ion-card>
+
+        <ion-card-content>
+
+            <ion-item>
+                <ion-label position="floating">Guidance - Instructions</ion-label>
+                <!--      <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>-->
+                <ion-textarea auto-grow="true" type="text" placeholder="e.x. Take it with a glass of water"
+                              name="name" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
+                <!--            <ion-button type="submit" (click)="onSubmit()">Submit</ion-button>-->
+            </ion-item>
+
+            <div class="ion-margin-vertical ion-text-right">
+                <ion-button fill="outline" color="danger">
+                    <ion-icon slot="start" name="trash-outline"></ion-icon>
+                    Clear
+                </ion-button>
+                <ion-button id="btn-confirm">
+                    <ion-icon slot="start" name="add-outline"></ion-icon>
+                    Add
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Food Interactions</ion-label>
+<!--                      <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>-->
+                <ion-textarea autoGrow="true" type="text" placeholder="e.x. Avoid Alcohol"
+                              name="name" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
+<!--                            <ion-button type="submit">Submit</ion-button>-->
+            </ion-item>
+
+            <div class="ion-margin-vertical ion-text-right">
+                <ion-button fill="outline" color="danger">
+                    <ion-icon slot="start" name="trash-outline"></ion-icon>
+                    Clear
+                </ion-button>
+                <ion-button>
+                    <ion-icon slot="start" name="add-outline"></ion-icon>
+                    Add
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
 </ion-content>
