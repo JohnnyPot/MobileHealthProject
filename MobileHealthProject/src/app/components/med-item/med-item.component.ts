@@ -16,6 +16,17 @@ export class MedItemComponent implements OnInit {
 
   @Input() medItem: MedicineModel;
 
+  hideme: boolean = false;
+
+  getColor(){
+    return this.hideme ? 'primary' : '';
+  }
+
+  hideFunc(){
+    this.hideme = !this.hideme;
+  }
+
+
   constructor(private apiStorageService: ApiStorageService,
               private alertCtrl: AlertController,
               public modalController: ModalController) { }
