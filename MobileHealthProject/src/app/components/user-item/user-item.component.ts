@@ -27,6 +27,10 @@ export class UserItemComponent implements OnInit {
     return this.userItem.id == this.apiStorageService.getActiveUserId() ? 'primary' : '';
   }
 
+  showButtons(){
+    return this.userItem.id == this.apiStorageService.getActiveUserId();
+  }
+
   changeUser() {
     this.apiStorageService.changeUser(this.userItem);
   }
@@ -35,6 +39,7 @@ export class UserItemComponent implements OnInit {
     this.apiStorageService.deleteUser(this.userItem.id);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
