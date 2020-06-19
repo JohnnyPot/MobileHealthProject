@@ -240,14 +240,11 @@ export class ApiStorageService {
         }
     }
 
-    editUserName(id: number, editedUser: UserModel) {
-        let userOnChange: UserModel = this.userList.filter(user => {
-            return user.id === id;
-        })[0];
+    editUserName(newName: string) {
 
-        if(userOnChange){
-            userOnChange = editedUser;
-        }
+        let userIdx = this.getActiveUserId()
+
+        this.userList[userIdx].name = newName;
 
         this.storage.setObject('userList', this.userList).then(() => {
             console.log("Saved userList");
