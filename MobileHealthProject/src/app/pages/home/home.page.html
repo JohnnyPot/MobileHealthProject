@@ -1,8 +1,12 @@
 <app-menu-header [header_title]= "'Home'"></app-menu-header>
 
 <ion-content>
-    <ion-card>khkjhkjhjkh</ion-card>
-    <ion-card>khkjhkjhjkh</ion-card>
-    <ion-card>khkjhkjhjkh</ion-card>
-    <ion-card>khkjhkjhjkh</ion-card>
+    <ion-list *ngFor="let pages of navigate">
+        <ion-card>
+            <ion-item [routerLink]="pages.url" routerDirection="forward">
+                <ion-icon [name]="pages.icon" slot="start"></ion-icon>
+                {{pages.title}}
+            </ion-item>
+        </ion-card>
+    </ion-list>
 </ion-content>
