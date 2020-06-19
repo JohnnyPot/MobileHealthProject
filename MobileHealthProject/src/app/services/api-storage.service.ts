@@ -288,6 +288,7 @@ export class ApiStorageService {
         return filteredInters;
     }
 
+
     getInterList() {
         return this.interList;
     }

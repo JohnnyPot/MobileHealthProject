@@ -1,0 +1,78 @@
+import {UserModel} from "../models/user.model";
+
+import {StorageService } from "./storage.service";
+
+class storestuff {
+    user1 = { id: 2, name: 'john'};
+    user2 = { id: 3, name: 'timos'};
+
+    all_users = [this.user1, this.user2];
+    all_foods = ['milk', 'alcohol'];
+    all_drugs = ['warfarin', 'atorvastatin', 'paracetamol'];
+    all_d_f_interactions_list = []
+
+    drug_comments = [];
+    medList = []
+
+    addUser(user : UserModel) {
+    }
+    deleteUser(user : UserModel){
+    }
+
+    addFood(foodName : string) {
+        //check if exist in frontend
+        this.all_foods.push(foodName);
+        this.storeFoodList();
+    }
+    deleteFood(_foodName: string) {
+        this.all_foods = this.all_foods.filter(food => {
+            return food !== _foodName;
+        });
+        this.storeFoodList();
+    }
+
+    add_drug_food_interaction(drugName : string, foodName: string, description:string ) {
+        const interaction = { drug: drugName, food: foodName, description: description };
+
+        this.all_d_f_interactions_list.push(interaction)
+        this.storeDFInteractionsList();
+    }
+
+    storeDFInteractionsList() {
+        this.strorage.setObject('drug_food_interactions', this.all_d_f_interactions_list);
+    }
+    storeDrugComments() {
+        this.userData.medList = this.medList;
+        this.userData.drugComments = this.drug_comments;
+
+    }
+
+    storeUserData() {
+        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
+            console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
+            console.log(JSON.stringify(this.userData));
+        });
+    }
+
+    delete_drug_food_interaction(drugName : string, foodName: string) {
+        this.all_d_f_interactions_list = this.all_d_f_interactions_list.filter(inter => {
+            return (inter.drug !== drugName && inter.food !== foodName);
+        });
+        this.storeDFInteractionsList();
+    }
+
+    add_drug_comment(drugName: string, comment: string, userId: number) {
+        const drug_comment = {drug: drugName, comment: comment};
+        this.drug_comments.push(drug_comment);
+        this.storeDrugComments();
+    }
+
+    delete_drug_comment(drugName: string) {
+        this.drug_comments = this.drug_comments.filter(drug_comment => {
+            return (drug_comment.drug !== drugName);
+        });
+        this.storeDrugComments();
+    }
+
+
+}
