@@ -69,7 +69,7 @@ export class ApiStorageService {
     private interList: InteractionModel[] = [];
 
 
-        constructor(private http: HttpClient,
+    constructor(private http: HttpClient,
                 private storage: StorageService) {
         this.userData = {};
         this.userData.medList = this.medList;
@@ -108,6 +108,7 @@ export class ApiStorageService {
     getActiveUserId() {
         return this.activeUser.id;
     }
+
 
     changeUser(user: UserModel) {
 
@@ -221,9 +222,15 @@ export class ApiStorageService {
     }
 
     deleteUser(id: number) {
+
         this.userList = this.userList.filter(user => {
             return user.id !== id;
         });
+
+        this.storage.setObject('userList', this.userList).then(() => {
+            console.log("Saved userList");
+        });
+
         this.storage.removeItem("userData" + id.toString()).then(() => {
             console.log("Removed user with id: " + id);
         });
@@ -231,6 +238,19 @@ export class ApiStorageService {
             this.activeUser = this.userList[0];
             console.log("Active user changed to first in userList (should always be guest):" + JSON.stringify(this.activeUser));
         }
+    }
+
+    editUserName(newName: string) {
+
+        let userIdx = this.getActiveUserId()
+
+        this.userList[userIdx].name = newName;
+
+        this.storage.setObject('userList', this.userList).then(() => {
+            console.log("Saved userList");
+        });
+
+
     }
 
     getAllUsers(): UserModel[] {
@@ -262,28 +282,28 @@ export class ApiStorageService {
 
     getInterFilteredList(names: string[]) {
 
-            let filteredInters: InteractionModel[] = [];
+        let filteredInters: InteractionModel[] = [];
 
-            for(let inter of this.interList){
+        for (let inter of this.interList) {
 
-                if(names.length == 1){
-                    if(names.some((med) => {
-                        return med.toUpperCase() === inter.drugs[0].toUpperCase() ||
-                            med.toUpperCase() === inter.drugs[1].toUpperCase();
-                    })){
-                        filteredInters.push(inter);
-                    }
-                }else{
-                    if(names.some((med) => {
-                        return med.toUpperCase() === inter.drugs[0].toUpperCase();
-                    }) && names.some((med) => {
-                        return med.toUpperCase() === inter.drugs[1].toUpperCase();
-                    })){
-                        filteredInters.push(inter);
-                    }
+            if (names.length == 1) {
+                if (names.some((med) => {
+                    return med.toUpperCase() === inter.drugs[0].toUpperCase() ||
+                        med.toUpperCase() === inter.drugs[1].toUpperCase();
+                })) {
+                    filteredInters.push(inter);
                 }
-
+            } else {
+                if (names.some((med) => {
+                    return med.toUpperCase() === inter.drugs[0].toUpperCase();
+                }) && names.some((med) => {
+                    return med.toUpperCase() === inter.drugs[1].toUpperCase();
+                })) {
+                    filteredInters.push(inter);
+                }
             }
+
+        }
 
         return filteredInters;
     }

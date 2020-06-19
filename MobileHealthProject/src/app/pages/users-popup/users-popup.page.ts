@@ -10,6 +10,8 @@ import {UserModel} from "../../models/user.model";
 })
 export class UsersPopupPage implements OnInit {
 
+  private UserName: string;
+  private  UserMedCondition: string;
 
   constructor(private apiStorageService: ApiStorageService,
               public viewCtrl: ModalController) { }
@@ -18,11 +20,23 @@ export class UsersPopupPage implements OnInit {
     this.viewCtrl.dismiss();
   }
 
-  getListOfUsers(): UserModel[]{
-    return this.apiStorageService.getAllUsers();
+  // getListOfUsers(): UserModel[]{
+  //   return this.apiStorageService.getAllUsers();
+  // }
+
+  setInitName(): void {
+    let activeUserIdx = this.apiStorageService.getActiveUserId();
+    this.UserName = this.apiStorageService.getAllUsers()[activeUserIdx].name;
   }
 
+
+  saveNewName(){
+    this.apiStorageService.editUserName(this.UserName);
+  }
+
+
   ngOnInit() {
+    this.setInitName();
   }
 
 }
