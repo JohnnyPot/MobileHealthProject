@@ -25,7 +25,7 @@ export class MedicinePopupDetailsPage implements OnInit {
       return med.name.startsWith(this.medName);
     })
 
-    console.log(this.medSugs);
+    // console.log(this.medSugs);
   }
 
   onClear(): void {
