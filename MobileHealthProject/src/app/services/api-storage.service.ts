@@ -6,6 +6,7 @@ import {FoodModel} from "../models/food.model";
 import {MedicineModel} from "../models/medicine.model";
 import {UserModel} from "../models/user.model";
 import {StorageService} from "./storage.service";
+import {FoodInteractionModel} from "../models/food-interaction.model";
 
 
 const httpOptions = {
@@ -23,6 +24,20 @@ export class ApiStorageService {
 
     private activeUser: UserModel = {id: 0, name: 'Guest'};
     private userData: any;
+
+    private foodInterList: FoodInteractionModel[] = [
+        {
+            drug: 'LIPITOR',
+            food: 'grapefruit',
+            description: '',
+        },
+        {
+            drug: 'WARFARIN',
+            food: 'alcohol',
+            description: '',
+        }
+    ]
+
     private foodList: FoodModel[] = [
         {
             id: 'r1',
@@ -137,6 +152,21 @@ export class ApiStorageService {
         });
     }
 
+    // ----------------------------------- Food Interaction ------------------------------------------- //
+
+    addFoodInter(drugName: string, foodName: string, desc: string): void {
+
+        let foodInter: FoodInteractionModel = {
+            drug: drugName,
+            food: foodName,
+            description: desc
+        }
+
+        this.foodInterList.push(foodInter);
+    }
+
+    getFood
+
 
     // ----------------------------------- Food ------------------------------------------- //
 
@@ -160,7 +190,6 @@ export class ApiStorageService {
     // }
 
     // ----------------------------------- Meds ------------------------------------------- //
-
 
     getAllMeds(): MedicineModel[] {
         return [...this.medList];
@@ -279,6 +308,10 @@ export class ApiStorageService {
     getInteractions(listOfRxcui: string): Observable<any> {
         return this.http.get(`${this.interactionUrl}interaction/list.json?rxcuis=${listOfRxcui}`);
     }
+
+
+    // ----------------------------------- Med Interactions ------------------------------------------- //
+
 
     getInterFilteredList(names: string[]) {
 

@@ -37,25 +37,64 @@
     </ion-card>
 
     <ion-card>
+        <ion-card-header>
+                Food Interactions
+        </ion-card-header>
         <ion-card-content>
-            <ion-item>
-                <ion-label position="floating">Food Interactions</ion-label>
-<!--                      <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>-->
-                <ion-textarea autoGrow="true" type="text" placeholder="e.x. Avoid Alcohol"
-                              name="name" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
-<!--                            <ion-button type="submit">Submit</ion-button>-->
-            </ion-item>
 
-            <div class="ion-margin-vertical ion-text-right">
-                <ion-button fill="outline" color="danger">
-                    <ion-icon slot="start" name="trash-outline"></ion-icon>
-                    Clear
-                </ion-button>
-                <ion-button>
-                    <ion-icon slot="start" name="add-outline"></ion-icon>
-                    Add
-                </ion-button>
-            </div>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">Drug Name</ion-label>
+                            <ion-input type="text" name="name"
+                                       [(ngModel)]="medName"
+                                       (change)="getSuggestions()"
+                                       placeholder="e.x. Lipitor"></ion-input>
+                        </ion-item>
+
+                        <ion-card *ngIf="medName !== '' && medSugs.length > 0" class="ion-no-padding">
+                            <ion-card-header>
+                                <ion-text>Maybe you mean</ion-text>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-list style="max-height: 20vh; width: 100%; overflow-y: scroll;">
+                                    <ion-item *ngFor="let sug of medSugs" (click)="onUpdate(sug.name)">
+                                        {{sug.name}}
+                                    </ion-item>
+                                </ion-list>
+                            </ion-card-content>
+                        </ion-card>
+
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">Food Name</ion-label>
+                            <ion-input type="text" name="name" placeholder="e.x. Alcohol"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <div class="ion-margin-vertical ion-text-right">
+                        <ion-button fill="outline" color="danger">
+                            <ion-icon slot="start" name="trash-outline"></ion-icon>
+                            Clear
+                        </ion-button>
+                        <ion-button>
+                            <ion-icon slot="start" name="add-outline"></ion-icon>
+                            Add
+                        </ion-button>
+                    </div>
+                </ion-row>
+            </ion-grid>
+<!--            <ion-item>-->
+<!--                <ion-label position="floating">Food Interactions</ion-label>-->
+<!--                &lt;!&ndash;                      <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>&ndash;&gt;-->
+<!--                <ion-input type="text" placeholder="e.x. Avoid Alcohol"-->
+<!--                           name="name" style="max-height: 12vh; overflow-y: scroll;"></ion-input>-->
+<!--                &lt;!&ndash;                            <ion-button type="submit">Submit</ion-button>&ndash;&gt;-->
+<!--            </ion-item>-->
+
         </ion-card-content>
     </ion-card>
 
