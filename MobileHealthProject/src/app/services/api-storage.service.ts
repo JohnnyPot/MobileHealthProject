@@ -27,32 +27,49 @@ export class ApiStorageService {
 
     private foodInterList: FoodInteractionModel[] = [
         {
-            drug: 'LIPITOR',
+            drug: 'lipitor',
             food: 'grapefruit',
             description: '',
         },
         {
-            drug: 'WARFARIN',
+            drug: 'warfarin',
             food: 'alcohol',
             description: '',
         }
     ]
 
+    // private foodList: FoodModel[] = [
+    //     {
+    //         id: 'r1',
+    //         title: 'Schnitzel',
+    //         // tslint:disable-next-line:max-line-length
+    //         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG/220px-Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG',
+    //         ingredients: ['French fries', 'Pork meat', 'flour', 'eggs']
+    //     },
+    //     {
+    //         id: 'r2',
+    //         title: 'Spaghetti',
+    //         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Spaghetti_spiral%2C_2008.jpg/126px-Spaghetti_spiral%2C_2008.jpg',
+    //         ingredients: ['Pasta', 'Tomatoes', 'Salt', 'Garlic', 'Onion']
+    //     }
+    // ];
+
     private foodList: FoodModel[] = [
         {
-            id: 'r1',
-            title: 'Schnitzel',
-            // tslint:disable-next-line:max-line-length
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG/220px-Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG',
-            ingredients: ['French fries', 'Pork meat', 'flour', 'eggs']
+            id: 0,
+            name: 'alcohol',
         },
         {
-            id: 'r2',
-            title: 'Spaghetti',
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Spaghetti_spiral%2C_2008.jpg/126px-Spaghetti_spiral%2C_2008.jpg',
-            ingredients: ['Pasta', 'Tomatoes', 'Salt', 'Garlic', 'Onion']
+            id: 1,
+            name: 'flour',
+        },
+        {
+            id: 2,
+            name: 'egg',
         }
     ];
+
+
     private userList: UserModel[] = [
         {
             id: 0,
@@ -140,7 +157,7 @@ export class ApiStorageService {
                 this.userData = userData;
                 this.medList = this.userData.medList;
                 console.log(this.medList);
-                this.foodList = this.userData.foodList;
+                // this.foodList = this.userData.foodList;
             } else {
                 console.log("Using dummy data");
                 if (user.name != 'Guest') {
@@ -165,7 +182,9 @@ export class ApiStorageService {
         this.foodInterList.push(foodInter);
     }
 
-    getFood
+    getFoodInter() {
+        return this.foodInterList;
+    }
 
 
     // ----------------------------------- Food ------------------------------------------- //
@@ -173,6 +192,10 @@ export class ApiStorageService {
     getAllFood() {
         return [...this.foodList];
         // return this.recipes;
+    }
+
+    addFood(food: FoodModel): void{
+        this.foodList.push(food);
     }
 
     // getRecipe(recipeId: string) {

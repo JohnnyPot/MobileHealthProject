@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {ApiStorageService} from "../../services/api-storage.service";
 import {MedicineModel} from "../../models/medicine.model";
+import {FoodModel} from "../../models/food.model";
 
 @Component({
   selector: 'app-medicine-popup-details',
@@ -13,36 +14,33 @@ export class MedicinePopupDetailsPage implements OnInit {
   constructor(public viewCtrl: ModalController,
               private apiStorageService: ApiStorageService) { }
 
-  medName: string = '';
-  medSugs: MedicineModel[] = [];
+  foodName: string = '';
+  foodSugs: FoodModel[] = []
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
-  getSuggestions(){
-    this.medSugs = this.apiStorageService.getAllMeds().filter(med => {
-      return med.name.startsWith(this.medName);
+  getFoodSuggestions(){
+    console.log(this.apiStorageService.getAllFood());
+    this.foodSugs = this.apiStorageService.getAllFood().filter(food => {
+      return food.name.startsWith(this.foodName);
     })
-
-    // console.log(this.medSugs);
   }
 
   onClear(): void {
-    this.medName = '';
-    this.clearSugs();
+    this.clearFoodSugs();
   }
 
-  onUpdate(search: string): void {
-    this.medName = search;
-    this.clearSugs();
+  onFoodUpdate(search: string): void {
+    this.foodName = search;
+    this.clearFoodSugs();
   }
 
-  clearSugs(): void {
-    this.medSugs = [];
+  clearFoodSugs(): void {
+    this.foodSugs = [];
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
