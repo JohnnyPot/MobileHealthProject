@@ -70,6 +70,10 @@ export class InteractionsPage implements OnInit {
         return this.apiStorageService.getInterFilteredList(this.getActiveButtonsNames());
     }
 
+    getActiveFoodInterList() {
+        return this.apiStorageService.getFilteredFoodInter(this.getActiveButtonsNames());
+    }
+
     ngOnInit() {
         this.initButtons();
         // this.interList = this.apiStorageService.getInterList();

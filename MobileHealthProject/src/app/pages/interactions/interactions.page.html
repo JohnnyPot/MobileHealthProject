@@ -40,7 +40,7 @@
                         <!--                </ion-card-header>-->
                         <ion-card-content class="ion-no-padding">
                             <ion-item *ngIf="!getInterFilteredList() || getInterFilteredList().length <= 0">
-                                No interactions
+                                No Drug interactions
                             </ion-item>
 
                             <ion-list *ngIf="getInterFilteredList().length > 0"
@@ -54,17 +54,23 @@
                     </ion-card>
                 </ion-slide>
 
-                <ion-slide style="width: 100%">
+                <ion-slide style="width: 100%" class="ion-no-padding">
                     <ion-card style="width: 100%">
-                        <ion-card-header>
-                            <ion-card-title>
-                                teleia2
-                            </ion-card-title>
-                        </ion-card-header>
-                        <ion-card-content>
-                            <ion-label>
-                                heeeeyyyy
-                            </ion-label>
+                        <!--                <ion-card-header>-->
+                        <!--                    <ion-searchbar placeholder="Filter Interactions"></ion-searchbar>-->
+                        <!--                </ion-card-header>-->
+                        <ion-card-content class="ion-no-padding">
+                            <ion-item *ngIf="getActiveFoodInterList().length <= 0">
+                                No Food interactions
+                            </ion-item>
+
+                            <ion-list *ngIf="getActiveFoodInterList().length > 0"
+                                      style="max-height: 400px;overflow-y: scroll;">
+                                <app-food-interaction-item
+                                        *ngFor="let foodInter of getActiveFoodInterList()"
+                                        [foodInterItem]="foodInter">
+                                </app-food-interaction-item>
+                            </ion-list>
                         </ion-card-content>
                     </ion-card>
                 </ion-slide>

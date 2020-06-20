@@ -77,7 +77,7 @@ export class MedicinePopupDetailsPage implements OnInit {
 
         this.apiStorageService.addFoodInter(this.medItem.name, this.foodName, this.desc);
 
-        this.foodInterList = this.apiStorageService.getFoodInter();
+        this.foodInterList = this.apiStorageService.getAllFoodInter();
 
         this.onClear();
     }
@@ -87,7 +87,7 @@ export class MedicinePopupDetailsPage implements OnInit {
     // }
 
     ngOnInit() {
-        this.foodInterList = this.apiStorageService.getFoodInter();
+        this.foodInterList = this.apiStorageService.getAllFoodInter();
     }
 
 }

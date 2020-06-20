@@ -1,0 +1,27 @@
+<ion-item lines="none" type="button" (click)="hideFunc()">
+  <ion-grid>
+    <ion-row>
+      <!--            <ion-item lines="none" [color]=this.getColor()>-->
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-icon name="arrow-forward" *ngIf="!hideme && foodInterItem.description !== ''" [color]=this.getColor()></ion-icon>
+        <ion-icon name="arrow-down" *ngIf="hideme && foodInterItem.description !== ''" [color]=this.getColor()></ion-icon>
+      </ion-item>
+
+      <!--            <ion-item lines="none" [color]=this.getColor()>-->
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-text class="ion-no-padding" [color]=this.getColor()>
+          {{foodInterItem.drug + " - " + foodInterItem.food}}
+        </ion-text>
+      </ion-item>
+    </ion-row>
+
+    <ion-row *ngIf="hideme">
+      <ion-col offset="1">
+        <ion-text color="medium">
+          {{foodInterItem.description}}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-item>

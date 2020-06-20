@@ -182,7 +182,22 @@ export class ApiStorageService {
         this.foodInterList.push(foodInter);
     }
 
-    getFoodInter() {
+    getFilteredFoodInter(activeMeds: string[]) {
+
+        let activeFoodInteractions: FoodInteractionModel[] = []
+
+        for(let foodInter of this.foodInterList){
+
+            if(activeMeds.some(med => {
+                return med === foodInter.drug;
+            })){
+                activeFoodInteractions.push(foodInter);
+            }
+        }
+        return activeFoodInteractions;
+    }
+
+    getAllFoodInter() {
         return this.foodInterList;
     }
 
