@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MedicineModel} from "../../models/medicine.model";
 import {ApiStorageService} from "../../services/api-storage.service";
 import {AlertController} from "@ionic/angular";
 import {stringify} from "querystring";
 import {InteractionModel} from "../../models/interaction.model";
+import {IonSlides} from '@ionic/angular';
+
 
 @Component({
     selector: 'app-interactions',
@@ -16,8 +18,10 @@ export class InteractionsPage implements OnInit {
                 private alertCtrl: AlertController) {
     }
 
+
     // interList: InteractionModel[] = [];
     medButtonFlags: {} = {};
+    pageFlag: number = 0;
 
 
 
@@ -68,6 +72,14 @@ export class InteractionsPage implements OnInit {
     ngOnInit() {
         this.initButtons();
         // this.interList = this.apiStorageService.getInterList();
+    }
+
+    slideChanged() {
+        this.pageFlag = (this.pageFlag + 1) % 2;
+    }
+
+    getSlideButtonColor(idx: number){
+        return this.pageFlag == idx ? 'solid' : 'clear';
     }
 
 }
