@@ -90,8 +90,8 @@ export class InteractionsPage implements OnInit {
         return this.pageFlag == idx ? 'solid' : 'clear';
     }
 
-    nextPage(){
-        this.slider.slideTo((this.pageFlag + 1) % 2);
+    nextPage(idx: number){
+        this.slider.slideTo(idx);
     }
 
 }
