@@ -19,6 +19,7 @@ export class InteractionsPage implements OnInit {
     }
 
 
+
     // interList: InteractionModel[] = [];
     medButtonFlags: {} = {};
     pageFlag: number = 0;
@@ -53,6 +54,8 @@ export class InteractionsPage implements OnInit {
 
 
     initButtons(){
+        this.medButtonFlags = {};
+
         for(let med of this.getListOfMeds()){
             this.medButtonFlags[med.name] = true;
         }
