@@ -3,6 +3,7 @@ import {AlertController, ModalController} from "@ionic/angular";
 import {ApiStorageService} from "../../services/api-storage.service";
 import {MedicineModel} from "../../models/medicine.model";
 import {FoodModel} from "../../models/food.model";
+import {FoodInteractionModel} from "../../models/food-interaction.model";
 
 @Component({
     selector: 'app-medicine-popup-details',
@@ -22,6 +23,8 @@ export class MedicinePopupDetailsPage implements OnInit {
     foodSugs: FoodModel[] = []
     desc: string = '';
 
+    foodInterList: FoodInteractionModel[] = []
+
     dismiss() {
         this.viewCtrl.dismiss();
     }
@@ -34,6 +37,7 @@ export class MedicinePopupDetailsPage implements OnInit {
     }
 
     onClear(): void {
+        this.foodName = '';
         this.clearFoodSugs();
     }
 
@@ -72,6 +76,10 @@ export class MedicinePopupDetailsPage implements OnInit {
         console.log('foodsWithThisName: ' + foodsWithThisName);
 
         this.apiStorageService.addFoodInter(this.medItem.name, this.foodName, this.desc);
+
+        this.foodInterList = this.apiStorageService.getFoodInter();
+
+        this.onClear();
     }
 
     // addNewFood(): void {
@@ -79,6 +87,7 @@ export class MedicinePopupDetailsPage implements OnInit {
     // }
 
     ngOnInit() {
+        this.foodInterList = this.apiStorageService.getFoodInter();
     }
 
 }
