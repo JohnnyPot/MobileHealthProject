@@ -23,6 +23,7 @@ export class InteractionsPage implements OnInit {
     medButtonFlags: {} = {};
     pageFlag: number = 0;
 
+    @ViewChild('slider', { static: false }) slider: IonSlides;
 
 
     changeButtonVal(name: string) {
@@ -80,6 +81,10 @@ export class InteractionsPage implements OnInit {
 
     getSlideButtonColor(idx: number){
         return this.pageFlag == idx ? 'solid' : 'clear';
+    }
+
+    nextPage(){
+        this.slider.slideTo((this.pageFlag + 1) % 2);
     }
 
 }
