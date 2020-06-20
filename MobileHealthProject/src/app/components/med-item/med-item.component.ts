@@ -33,7 +33,10 @@ export class MedItemComponent implements OnInit {
 
   async openEditModal() {
     const modal = await this.modalController.create({
-      component: MedicinePopupDetailsPage
+      component: MedicinePopupDetailsPage,
+      componentProps: {
+        'medItem': this.medItem
+      }
     });
     return await modal.present();
   }

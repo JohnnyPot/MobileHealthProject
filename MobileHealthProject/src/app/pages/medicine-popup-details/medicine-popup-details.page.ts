@@ -1,46 +1,84 @@
-import { Component, OnInit } from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {Component, Input, OnInit} from '@angular/core';
+import {AlertController, ModalController} from "@ionic/angular";
 import {ApiStorageService} from "../../services/api-storage.service";
 import {MedicineModel} from "../../models/medicine.model";
 import {FoodModel} from "../../models/food.model";
 
 @Component({
-  selector: 'app-medicine-popup-details',
-  templateUrl: './medicine-popup-details.page.html',
-  styleUrls: ['./medicine-popup-details.page.scss'],
+    selector: 'app-medicine-popup-details',
+    templateUrl: './medicine-popup-details.page.html',
+    styleUrls: ['./medicine-popup-details.page.scss'],
 })
 export class MedicinePopupDetailsPage implements OnInit {
 
-  constructor(public viewCtrl: ModalController,
-              private apiStorageService: ApiStorageService) { }
+    constructor(public viewCtrl: ModalController,
+                private alertCtrl: AlertController,
+                private apiStorageService: ApiStorageService) {
+    }
 
-  foodName: string = '';
-  foodSugs: FoodModel[] = []
+    @Input() medItem: MedicineModel;
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
+    foodName: string = '';
+    foodSugs: FoodModel[] = []
+    desc: string = '';
 
-  getFoodSuggestions(){
-    console.log(this.apiStorageService.getAllFood());
-    this.foodSugs = this.apiStorageService.getAllFood().filter(food => {
-      return food.name.startsWith(this.foodName);
-    })
-  }
+    dismiss() {
+        this.viewCtrl.dismiss();
+    }
 
-  onClear(): void {
-    this.clearFoodSugs();
-  }
+    getFoodSuggestions() {
+        // console.log(this.apiStorageService.getAllFood());
+        this.foodSugs = this.apiStorageService.getAllFood().filter(food => {
+            return food.name.startsWith(this.foodName);
+        })
+    }
 
-  onFoodUpdate(search: string): void {
-    this.foodName = search;
-    this.clearFoodSugs();
-  }
+    onClear(): void {
+        this.clearFoodSugs();
+    }
 
-  clearFoodSugs(): void {
-    this.foodSugs = [];
-  }
+    onFoodUpdate(search: string): void {
+        this.foodName = search;
+        this.clearFoodSugs();
+    }
 
-  ngOnInit() {}
+    clearFoodSugs(): void {
+        this.foodSugs = [];
+    }
+
+    addFoodInteraction() {
+        let foodsWithThisName: number = this.apiStorageService.getAllFood().filter(food => {
+            return food.name.toUpperCase() === this.foodName.toUpperCase();
+        }).length;
+
+        if (foodsWithThisName == 0) {
+            this.alertCtrl.create({
+                header: 'This food is not in your list',
+                message: 'If you continue you will automatically add it as a new item',
+                buttons: [{
+                    text: 'Cancel',
+                    role: 'cancel'
+                }, {
+                    text: 'Continue',
+                    handler: () => {
+                        this.apiStorageService.addFood(this.foodName);
+                    }
+                }]
+            }).then(alertEl => {
+                alertEl.present();
+            });
+        }
+
+        console.log('foodsWithThisName: ' + foodsWithThisName);
+
+        this.apiStorageService.addFoodInter(this.medItem.name, this.foodName, this.desc);
+    }
+
+    // addNewFood(): void {
+    //     this.apiStorageService.addFood(this.foodName);
+    // }
+
+    ngOnInit() {
+    }
 
 }

@@ -194,7 +194,12 @@ export class ApiStorageService {
         // return this.recipes;
     }
 
-    addFood(food: FoodModel): void{
+    addFood(foodName: string): void{
+
+        let food: FoodModel = {
+            id: this.foodList.length,
+            name: foodName
+        }
         this.foodList.push(food);
     }
 
