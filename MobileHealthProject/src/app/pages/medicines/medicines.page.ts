@@ -13,9 +13,11 @@ export class MedicinesPage implements OnInit {
     name: string = '';
     sugs: string[] = [];
 
+
     constructor(private apiStorageService: ApiStorageService,
                 private alertCtrl: AlertController) {
     }
+
 
     getListOfMed(): MedicineModel[] {
         return this.apiStorageService.getAllMeds();

@@ -17,6 +17,16 @@ export class MedItemComponent implements OnInit {
     @Input() medItem: MedicineModel;
 
     hideme: boolean = false;
+    // medComStr: string = '';
+
+
+    getMedCom() {
+        if (this.apiStorageService.checkIfMedCom(this.medItem.name)) {
+            return this.apiStorageService.getMedCom(this.medItem.name).comment;
+        } else {
+            return '';
+        }
+    }
 
     getColor() {
         return this.hideme ? 'primary' : '';
@@ -61,6 +71,7 @@ export class MedItemComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getMedCom();
     }
 
 }

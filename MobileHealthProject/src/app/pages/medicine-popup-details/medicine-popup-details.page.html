@@ -19,18 +19,18 @@
                 <ion-label position="floating">Guidance - Instructions</ion-label>
                 <!--      <ion-input type="text" name="name" [(ngModel)]="name" (change)="clearSugs()"></ion-input>-->
                 <ion-textarea auto-grow="true" type="text" placeholder="e.x. Take it with a glass of water"
-                              name="name" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
+                              [(ngModel)]="medComStr" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
                 <!--            <ion-button type="submit" (click)="onSubmit()">Submit</ion-button>-->
             </ion-item>
 
             <div class="ion-margin-vertical ion-text-right">
-                <ion-button fill="outline" color="danger">
+                <ion-button fill="outline" color="danger" (click)="getMedCom()">
                     <ion-icon slot="start" name="trash-outline"></ion-icon>
-                    Clear
+                    Reset
                 </ion-button>
-                <ion-button id="btn-confirm">
+                <ion-button id="btn-confirm" (click)="saveMedCom()">
                     <ion-icon slot="start" name="add-outline"></ion-icon>
-                    Add
+                    Edit
                 </ion-button>
             </div>
         </ion-card-content>

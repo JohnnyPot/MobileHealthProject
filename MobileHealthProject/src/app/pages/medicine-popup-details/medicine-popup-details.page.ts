@@ -19,6 +19,7 @@ export class MedicinePopupDetailsPage implements OnInit {
 
     @Input() medItem: MedicineModel;
 
+    medComStr: string = '';
     foodName: string = '';
     foodSugs: FoodModel[] = []
     desc: string = '';
@@ -36,7 +37,7 @@ export class MedicinePopupDetailsPage implements OnInit {
         })
     }
 
-    getFoodInter(){
+    getFoodInter() {
         return this.apiStorageService.getFilteredFoodInter([this.medItem.name]);
     }
 
@@ -95,8 +96,26 @@ export class MedicinePopupDetailsPage implements OnInit {
     //     this.apiStorageService.addFood(this.foodName);
     // }
 
+    getMedCom() {
+        if (this.apiStorageService.checkIfMedCom(this.medItem.name)) {
+            this.medComStr = this.apiStorageService.getMedCom(this.medItem.name).comment;
+        } else {
+            this.medComStr = ''
+        }
+    }
+
+    saveMedCom() {
+        if (this.apiStorageService.checkIfMedCom(this.medItem.name)) {
+            this.apiStorageService.editMedCom(this.medItem.name, this.medComStr);
+        } else {
+            this.apiStorageService.addMedCom(this.medItem.name, this.medComStr);
+        }
+        // console.log("oook");
+    }
+
     ngOnInit() {
         this.foodInterList = this.apiStorageService.getAllFoodInter();
+        this.getMedCom();
     }
 
 }

@@ -18,8 +18,8 @@
 
 
                 <ion-item lines="none" class="ion-no-padding">
-<!--                    <ion-icon name="arrow-forward" *ngIf="!hideme" [color]=this.getColor()></ion-icon>-->
-<!--                    <ion-icon name="arrow-down" *ngIf="hideme" [color]=this.getColor()></ion-icon>-->
+                    <!--                    <ion-icon name="arrow-forward" *ngIf="!hideme" [color]=this.getColor()></ion-icon>-->
+                    <!--                    <ion-icon name="arrow-down" *ngIf="hideme" [color]=this.getColor()></ion-icon>-->
 
                     <ion-label class="ion-no-padding" [color]=this.getColor()>
                         {{medItem.name}}
@@ -31,11 +31,10 @@
 
         </ion-row>
 
-        <ion-row *ngIf="hideme">
+        <ion-row *ngIf="hideme && this.getMedCom() !== ''">
             <ion-col offset="1">
                 <ion-text color="medium">
-                    <!--                {{interItem.description}}-->
-                    elaaaaa
+                    {{this.getMedCom()}}
                 </ion-text>
             </ion-col>
         </ion-row>

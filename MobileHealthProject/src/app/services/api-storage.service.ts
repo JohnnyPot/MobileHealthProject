@@ -259,6 +259,28 @@ export class ApiStorageService {
         this.updateInterList();
     }
 
+    checkIfMedCom(drug: string): boolean{
+        return this.medComs.some(medCom => {
+            return medCom.drug == drug;
+        })
+    }
+
+    editMedCom(drug: string, comment: string): void{
+        let medComIdx = this.medComs.findIndex(medCom => {
+            return medCom.drug === drug;
+        });
+
+        this.medComs[medComIdx].comment = comment;
+    }
+
+    deleteMedCom(drug: string): void{
+        let medComIdx = this.medComs.findIndex(medCom => {
+            return medCom.drug === drug;
+        });
+
+        delete this.medComs[medComIdx];
+    }
+
     addMedCom(drug: string, comment: string) {
 
         let medCom: MedCommentModel = {
