@@ -29,7 +29,7 @@ export class MedItemComponent implements OnInit {
     }
 
     getColor() {
-        return this.hideme ? 'primary' : '';
+        return this.hideme && this.getMedCom() !== '' ? 'primary' : '';
     }
 
     hideFunc() {
