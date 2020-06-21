@@ -10,6 +10,7 @@ import {InteractionsPage} from './interactions.page';
 import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
 import {InteractionItemComponent} from "../../components/interaction-item/interaction-item.component";
 import {FoodInteractionItemComponent} from "../../components/food-interaction-item/food-interaction-item.component";
+import {FoodInterModule} from "../../modules/food-inter/food-inter.module";
 
 @NgModule({
     imports: [
@@ -17,9 +18,10 @@ import {FoodInteractionItemComponent} from "../../components/food-interaction-it
         FormsModule,
         IonicModule,
         InteractionsPageRoutingModule,
-        MenuHeaderModule
+        MenuHeaderModule,
+        FoodInterModule
     ],
-    declarations: [InteractionsPage, InteractionItemComponent, FoodInteractionItemComponent]
+    declarations: [InteractionsPage, InteractionItemComponent]
 })
 export class InteractionsPageModule {
 }

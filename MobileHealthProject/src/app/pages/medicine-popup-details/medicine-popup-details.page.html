@@ -84,4 +84,23 @@
         </ion-card-content>
     </ion-card>
 
+    <ion-card style="width: 100%; height: 100%">
+        <!--                <ion-card-header>-->
+        <!--                    <ion-searchbar placeholder="Filter Interactions"></ion-searchbar>-->
+        <!--                </ion-card-header>-->
+        <ion-card-content class="ion-no-padding">
+            <ion-item *ngIf="getFoodInter().length <= 0">
+                No Food interactions
+            </ion-item>
+
+            <ion-list *ngIf="getFoodInter().length > 0"
+                      style="max-height: 400px;overflow-y: scroll;">
+                <app-food-interaction-item
+                        *ngFor="let foodInter of getFoodInter()"
+                        [foodInterItem]="foodInter">
+                </app-food-interaction-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
 </ion-content>

@@ -36,8 +36,13 @@ export class MedicinePopupDetailsPage implements OnInit {
         })
     }
 
+    getFoodInter(){
+        return this.apiStorageService.getFilteredFoodInter([this.medItem.name]);
+    }
+
     onClear(): void {
         this.foodName = '';
+        this.desc = '';
         this.clearFoodSugs();
     }
 
