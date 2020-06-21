@@ -55,6 +55,8 @@ export class MedicinePopupDetailsPage implements OnInit {
             return food.name.toUpperCase() === this.foodName.toUpperCase();
         }).length;
 
+        let foodName = this.foodName;
+
         if (foodsWithThisName == 0) {
             this.alertCtrl.create({
                 header: 'This food is not in your list',
@@ -65,7 +67,9 @@ export class MedicinePopupDetailsPage implements OnInit {
                 }, {
                     text: 'Continue',
                     handler: () => {
-                        this.apiStorageService.addFood(this.foodName);
+                        this.apiStorageService.addFood(foodName);
+                        // console.log('foodName: ' + foodName);
+
                     }
                 }]
             }).then(alertEl => {
@@ -73,7 +77,7 @@ export class MedicinePopupDetailsPage implements OnInit {
             });
         }
 
-        console.log('foodsWithThisName: ' + foodsWithThisName);
+        // console.log('foodsWithThisName: ' + foodsWithThisName);
 
         this.apiStorageService.addFoodInter(this.medItem.name, this.foodName, this.desc);
 

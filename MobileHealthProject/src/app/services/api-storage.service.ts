@@ -151,12 +151,13 @@ export class ApiStorageService {
         this.activeUser = user;
         this.storage.getObject("userData" + user.id.toString()).then((userData) => {
             console.log("Changing user. User '" + user.name + "'has saved data:");
-            console.log(JSON.stringify(userData));
+            // console.log(JSON.stringify(userData));
 
             if (userData) {
                 this.userData = userData;
                 this.medList = this.userData.medList;
-                console.log(this.medList);
+                // console.log(this.medList);
+
                 // this.foodList = this.userData.foodList;
             } else {
                 console.log("Using dummy data");
@@ -218,19 +219,6 @@ export class ApiStorageService {
         this.foodList.push(food);
     }
 
-    // getRecipe(recipeId: string) {
-    //   return {
-    //     ...this.recipes.find(recipe => {
-    //       return recipe.id === recipeId;
-    //     })
-    //   };
-    // }
-
-    // deleteRecipe(recipeId: string) {
-    //   this.recipes = this.recipes.filter(recipe => {
-    //     return recipe.id !== recipeId;
-    //   });
-    // }
 
     // ----------------------------------- Meds ------------------------------------------- //
 
@@ -253,7 +241,7 @@ export class ApiStorageService {
         this.userData.medList = this.medList;
         this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
             console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
-            console.log(JSON.stringify(this.userData));
+            // console.log(JSON.stringify(this.userData));
         });
         this.updateInterList();
     }
@@ -407,22 +395,22 @@ export class ApiStorageService {
 
         this.getInteractions(interaction_drugRxcuis).subscribe(interactionJson => {
 
-            console.log(interactionJson);
+            // console.log(interactionJson);
 
             if (interactionJson.hasOwnProperty('fullInteractionTypeGroup')) {
                 // console.log('Bravo');
                 // console.log(interactionJson.fullInteractionTypeGroup.fullInteractionType)
 
                 for (let InteractionTypeGroup of interactionJson.fullInteractionTypeGroup) {
-                    console.log('interaction Group: ' + InteractionTypeGroup.fullInteractionType);
+                    // console.log('interaction Group: ' + InteractionTypeGroup.fullInteractionType);
 
                     for (let InteractionType of InteractionTypeGroup.fullInteractionType) {
-                        console.log('interaction Type: ' + InteractionType);
+                        // console.log('interaction Type: ' + InteractionType);
 
                         let drugs = []
 
                         for (let drug of InteractionType.minConcept) {
-                            console.log('Drug`s name: ' + drug.name);
+                            // console.log('Drug`s name: ' + drug.name);
                             drugs.push(drug.name)
                         }
 
@@ -431,7 +419,7 @@ export class ApiStorageService {
                         //     drugs.push(drug.minConceptItem.name)
                         // }
 
-                        console.log('Description: ' + InteractionType.interactionPair.description);
+                        // console.log('Description: ' + InteractionType.interactionPair.description);
 
                         let interaction = {
                             drugs: drugs,

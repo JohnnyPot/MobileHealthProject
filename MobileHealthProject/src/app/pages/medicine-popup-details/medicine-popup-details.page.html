@@ -63,6 +63,12 @@
                 </ion-card-content>
             </ion-card>
 
+            <ion-item>
+                <ion-label position="floating">Description of interaction</ion-label>
+                <ion-textarea auto-grow="true" type="text" placeholder="e.x. Increase the metabolism"
+                              [(ngModel)]="desc" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
+            </ion-item>
+
             <div class="ion-margin-vertical ion-text-right">
                 <!--                        <ion-button fill="outline" color="danger">-->
                 <!--                            <ion-icon slot="start" name="trash-outline"></ion-icon>-->

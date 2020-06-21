@@ -13,11 +13,9 @@ export class MedicinesPage implements OnInit {
     name: string = '';
     sugs: string[] = [];
 
-
     constructor(private apiStorageService: ApiStorageService,
                 private alertCtrl: AlertController) {
     }
-
 
     getListOfMed(): MedicineModel[] {
         return this.apiStorageService.getAllMeds();
@@ -44,7 +42,7 @@ export class MedicinesPage implements OnInit {
 
                     if (this.apiStorageService.checkMed(parseInt(med.idGroup.rxnormId[0]))) {
                         this.addMed(med.idGroup.name, parseInt(med.idGroup.rxnormId[0]));
-                        console.log(med.idGroup.rxnormId);
+                        // console.log(med.idGroup.rxnormId);
                     } else {
                         this.alertCtrl.create({
                             header: 'Warning',
