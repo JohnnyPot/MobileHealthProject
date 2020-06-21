@@ -10,6 +10,8 @@ import {MedicinesPage} from './medicines.page';
 import {MedItemComponent} from "../../components/med-item/med-item.component";
 import {MenuHeaderComponent} from "../../components/menu-header/menu-header.component";
 import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
+import {UserMenuComponent} from "../../components/user-menu/user-menu.component";
+import {AnimateSlidingItemDirective} from "../../directives/animate-sliding-item.directive";
 
 @NgModule({
     imports: [
@@ -19,7 +21,7 @@ import {MenuHeaderModule} from "../../modules/menu-header/menu-header.module";
         MedicinesPageRoutingModule,
         MenuHeaderModule
     ],
-    declarations: [MedicinesPage, MedItemComponent]
+    declarations: [MedicinesPage, MedItemComponent]//, AnimateSlidingItemDirective]
 })
 export class MedicinesPageModule {
 }

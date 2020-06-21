@@ -15,6 +15,7 @@ import {AddUserPopupPageModule} from "./pages/add-user-popup/add-user-popup.modu
 import {UserMenuComponent} from "./components/user-menu/user-menu.component";
 import {UserItemModule} from "./modules/user-item/user-item.module";
 import {MedicinePopupDetailsPageModule} from "./pages/medicine-popup-details/medicine-popup-details.module";
+import { AnimateSlidingItemDirective } from './directives/animate-sliding-item.directive';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiStorageService} from "../../services/api-storage.service";
-import {AlertController} from "@ionic/angular";
+import {AlertController, IonSlides} from "@ionic/angular";
 import {MedicineModel} from "../../models/medicine.model";
 
 @Component({

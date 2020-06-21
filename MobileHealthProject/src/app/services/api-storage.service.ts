@@ -7,6 +7,8 @@ import {MedicineModel} from "../models/medicine.model";
 import {UserModel} from "../models/user.model";
 import {StorageService} from "./storage.service";
 import {FoodInteractionModel} from "../models/food-interaction.model";
+import {FoodCommentModel} from "../models/food-comment.model";
+import {MedCommentModel} from "../models/med-comment.model";
 
 
 const httpOptions = {
@@ -24,6 +26,8 @@ export class ApiStorageService {
 
     private activeUser: UserModel = {id: 0, name: 'Guest'};
     private userData: any;
+    private medComs: MedCommentModel[] = [];
+    private foodComs: FoodCommentModel[] = [];
 
     private foodInterList: FoodInteractionModel[] = [
         {
@@ -38,21 +42,6 @@ export class ApiStorageService {
         }
     ]
 
-    // private foodList: FoodModel[] = [
-    //     {
-    //         id: 'r1',
-    //         title: 'Schnitzel',
-    //         // tslint:disable-next-line:max-line-length
-    //         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG/220px-Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG',
-    //         ingredients: ['French fries', 'Pork meat', 'flour', 'eggs']
-    //     },
-    //     {
-    //         id: 'r2',
-    //         title: 'Spaghetti',
-    //         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Spaghetti_spiral%2C_2008.jpg/126px-Spaghetti_spiral%2C_2008.jpg',
-    //         ingredients: ['Pasta', 'Tomatoes', 'Salt', 'Garlic', 'Onion']
-    //     }
-    // ];
 
     private foodList: FoodModel[] = [
         {
@@ -106,6 +95,8 @@ export class ApiStorageService {
         this.userData = {};
         this.userData.medList = this.medList;
         this.userData.foodList = this.foodList;
+        this.userData.foodComs = this.foodComs;
+        this.userData.medComs = this.medComs;
         this.loadData();
         // this.updateInterList();
     }
@@ -156,9 +147,8 @@ export class ApiStorageService {
             if (userData) {
                 this.userData = userData;
                 this.medList = this.userData.medList;
-                // console.log(this.medList);
-
                 // this.foodList = this.userData.foodList;
+                // console.log(this.medList);
             } else {
                 console.log("Using dummy data");
                 if (user.name != 'Guest') {
@@ -187,11 +177,11 @@ export class ApiStorageService {
 
         let activeFoodInteractions: FoodInteractionModel[] = []
 
-        for(let foodInter of this.foodInterList){
+        for (let foodInter of this.foodInterList) {
 
-            if(activeMeds.some(med => {
+            if (activeMeds.some(med => {
                 return med === foodInter.drug;
-            })){
+            })) {
                 activeFoodInteractions.push(foodInter);
             }
         }
@@ -210,13 +200,29 @@ export class ApiStorageService {
         // return this.recipes;
     }
 
-    addFood(foodName: string): void{
+    addFood(foodName: string): void {
 
         let food: FoodModel = {
             id: this.foodList.length,
             name: foodName
         }
         this.foodList.push(food);
+    }
+
+    addFoodCom(food: string, comment: string) {
+
+        let foodCom: FoodCommentModel = {
+            food: food,
+            comment: comment
+        }
+
+        this.foodComs.push(foodCom);
+    }
+
+    getFoodCom(foodName: string) {
+        return this.foodComs.filter(com => {
+            return com.food === foodName;
+        })[0];
     }
 
 
@@ -251,6 +257,22 @@ export class ApiStorageService {
             return med.rxnormId !== recipeId;
         });
         this.updateInterList();
+    }
+
+    addMedCom(drug: string, comment: string) {
+
+        let medCom: MedCommentModel = {
+            drug: drug,
+            comment: comment
+        }
+
+        this.medComs.push(medCom)
+    }
+
+    getMedCom(drugName: string) {
+        return this.medComs.filter(com => {
+            return com.drug === drugName;
+        })[0];
     }
 
 
