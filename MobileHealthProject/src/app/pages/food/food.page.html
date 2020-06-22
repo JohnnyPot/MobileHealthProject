@@ -1,10 +1,63 @@
-<app-menu-header [header_title]= "'Food'"></app-menu-header>
+<app-menu-header [header_title]="'Food'"></app-menu-header>
 
-<ion-content>
-  <ion-list>
-    <app-food-item
-            *ngFor="let food of getAllFood()"
-            [foodItem]="food">
-    </app-food-item>
-  </ion-list>
+<ion-content style="max-height: 100vh">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>
+                Food List
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Food Name</ion-label>
+                <ion-input type="text" name="name"
+                           [(ngModel)]="foodName"
+                           placeholder="e.x. Alcohol"></ion-input>
+            </ion-item>
+            <ion-card *ngIf="foodName !== '' && foodSugs.length > 0" class="ion-no-padding">
+                <ion-card-header>
+                    <ion-text>Maybe you mean</ion-text>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-list style="max-height: 20vh; width: 100%; overflow-y: scroll;">
+                        <ion-item *ngFor="let sug of foodSugs">
+                            {{sug.name}}
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card>
+
+            <ion-item>
+                <ion-label position="floating">Comment</ion-label>
+                <ion-textarea auto-grow="true" type="text" placeholder="e.x. Increases the blood pressure"
+                              [(ngModel)]="desc" style="max-height: 12vh; overflow-y: scroll;"></ion-textarea>
+            </ion-item>
+
+            <div class="ion-margin-vertical ion-text-right">
+                <!--                        <ion-button fill="outline" color="danger">-->
+                <!--                            <ion-icon slot="start" name="trash-outline"></ion-icon>-->
+                <!--                            Clear-->
+                <!--                        </ion-button>-->
+                <ion-button>
+                    <ion-icon slot="start" name="add-outline"></ion-icon>
+                    Add
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-item *ngIf="this.getAllFood().length <= 0" lines="none">
+            Empty Food List
+        </ion-item>
+
+        <ion-list style="max-height: 59vh; overflow-y: scroll;">
+            <app-food-item
+                    *ngFor="let food of getAllFood()"
+                    [foodItem]="food">
+            </app-food-item>
+        </ion-list>
+    </ion-card>
+
 </ion-content>

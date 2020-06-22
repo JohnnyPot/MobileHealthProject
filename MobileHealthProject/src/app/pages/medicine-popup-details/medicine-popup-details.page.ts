@@ -75,7 +75,6 @@ export class MedicinePopupDetailsPage implements OnInit {
                     handler: () => {
                         this.apiStorageService.addFood(foodName);
                         // console.log('foodName: ' + foodName);
-
                     }
                 }]
             }).then(alertEl => {
