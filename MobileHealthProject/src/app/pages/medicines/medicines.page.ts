@@ -44,6 +44,7 @@ export class MedicinesPage implements OnInit {
 
                     if (this.apiStorageService.checkMed(parseInt(med.idGroup.rxnormId[0]))) {
                         this.addMed(med.idGroup.name, parseInt(med.idGroup.rxnormId[0]));
+                        this.onClear()
                         // console.log(med.idGroup.rxnormId);
                     } else {
                         this.alertCtrl.create({

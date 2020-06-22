@@ -18,22 +18,36 @@ export class FoodPage implements OnInit {
   foodSugs: FoodModel[] = []
   desc: string = '';
 
-  constructor(private apiStorageService: ApiStorageService) { }
-  // constructor() { }
+  constructor(private apiStorageService: ApiStorageService,
+              private alertCtrl: AlertController) { }
 
   getAllFood(){
     return this.apiStorageService.getAllFood()
   }
 
-
-  addMed(_name: string, _rxnormId: number): void {
-    const med = {
-      name: _name,
-      rxnormId: _rxnormId
+  onSubmit(){
+    if (this.apiStorageService.checkFood(this.foodName)) {
+      this.addFood(this.foodName);
+    } else {
+      this.alertCtrl.create({
+        header: 'Warning',
+        message: 'This food there is already in your list ',
+        buttons: [{
+          text: 'Ok',
+          role: 'Okay'
+        }]
+      }).then(alertEl => {
+        alertEl.present();
+      });
     }
+  }
 
-    this.apiStorageService.addMed(med);
 
+
+
+
+  addFood(_name: string): void {
+    this.apiStorageService.addFood(_name);
   }
 
   onClear(): void {

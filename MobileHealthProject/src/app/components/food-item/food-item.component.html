@@ -1,7 +1,16 @@
 <ion-item lines="none" type="button">
-<!--<ion-item [routerLink]="['/foods', foodItem.id]">-->
-<!--  <ion-avatar slot="start">-->
-<!--    <ion-img [src]="foodItem.imageUrl"></ion-img>-->
-<!--  </ion-avatar>-->
-  <ion-label>{{foodItem.name}}</ion-label>
+    <ion-item-sliding>
+        <ion-item-options side="end">
+
+            <ion-item-option color="danger" (click)="onDelete()">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+
+        </ion-item-options>
+
+        <ion-item lines="none">
+            <ion-label>{{foodItem.name}}    (Interactions:{{this.countFoodInter()}})</ion-label>
+        </ion-item>
+
+    </ion-item-sliding>
 </ion-item>

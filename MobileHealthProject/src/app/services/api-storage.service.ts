@@ -55,6 +55,10 @@ export class ApiStorageService {
         {
             id: 2,
             name: 'egg',
+        },
+        {
+            id:3,
+            name: 'grapefruit'
         }
     ];
 
@@ -173,6 +177,12 @@ export class ApiStorageService {
         this.foodInterList.push(foodInter);
     }
 
+    deleteFoodInter(_foodName: string){
+        this.foodInterList = this.foodInterList.filter(foodInter => {
+            return foodInter.food !== _foodName;
+        });
+    }
+
     getFilteredFoodInter(activeMeds: string[]) {
 
         let activeFoodInteractions: FoodInteractionModel[] = []
@@ -186,6 +196,12 @@ export class ApiStorageService {
             }
         }
         return activeFoodInteractions;
+    }
+
+    countFoodInter(foodName: string): number {
+        return this.foodInterList.filter(foodInter => {
+            return foodInter.food === foodName;
+        }).length;
     }
 
     getAllFoodInter() {
@@ -207,6 +223,28 @@ export class ApiStorageService {
             name: foodName
         }
         this.foodList.push(food);
+    }
+
+    deleteFood(foodName: string) {
+        this.foodList = this.foodList.filter(food => {
+            return food.name !== foodName;
+        });
+
+        this.deleteFoodInter(foodName);
+    }
+
+    checkFood(foodName: string) {
+        return this.foodList.filter(food => {
+            return foodName === food.name;
+        }).length < 1;
+    }
+
+    editFoodCom(food: string, comment: string): void{
+        let foodComIdx = this.foodComs.findIndex(foodCom => {
+            return foodCom.food === food;
+        });
+
+        this.foodComs[foodComIdx].comment = comment;
     }
 
     addFoodCom(food: string, comment: string) {
