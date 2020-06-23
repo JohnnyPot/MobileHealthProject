@@ -18,20 +18,15 @@ export class HomePage {
                     icon: "medkit"
                 },
                 {
-                    title: "Drug-Drug Interactions",
+                    title: "Interactions",
                     url: "/interactions",
                     icon: "flask"
                 },
                 {
-                    title: "Food-Drug Interactions",
+                    title: "Food",
                     url: "/food",
                     icon: "pizza"
                 },
-                // {
-                //     title: "Users",
-                //     url: "/users",
-                //     icon: "people"
-                // },
                 {
                     title: "About",
                     url: "/about",
