@@ -217,7 +217,6 @@ export class ApiStorageService {
     }
 
     addFood(foodName: string): void {
-
         let food: FoodModel = {
             id: this.foodList.length,
             name: foodName
@@ -237,6 +236,12 @@ export class ApiStorageService {
         return this.foodList.filter(food => {
             return foodName === food.name;
         }).length < 1;
+    }
+
+    checkIfFoodCom(food: string): boolean{
+        return this.foodComs.some(foodCom => {
+            return foodCom.food === food;
+        })
     }
 
     editFoodCom(food: string, comment: string): void{
@@ -299,7 +304,7 @@ export class ApiStorageService {
 
     checkIfMedCom(drug: string): boolean{
         return this.medComs.some(medCom => {
-            return medCom.drug == drug;
+            return medCom.drug === drug;
         })
     }
 

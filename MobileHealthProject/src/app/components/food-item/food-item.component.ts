@@ -16,6 +16,25 @@ export class FoodItemComponent implements OnInit {
               private apiStorageService: ApiStorageService) { }
 
 
+  hideme: boolean = false;
+
+  getFoodCom() {
+    if (this.apiStorageService.checkIfFoodCom(this.foodItem.name)) {
+      return this.apiStorageService.getFoodCom(this.foodItem.name).comment;
+    } else {
+      return '';
+    }
+  }
+
+  getColor() {
+    return this.hideme && this.getFoodCom() !== '' ? 'primary' : '';
+  }
+
+  hideFunc() {
+    this.hideme = !this.hideme;
+  }
+
+
   countFoodInter(): number {
     return this.apiStorageService.countFoodInter(this.foodItem.name);
   }

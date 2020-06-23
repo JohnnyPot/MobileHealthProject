@@ -12,8 +12,7 @@ import {FoodModel} from "../../models/food.model";
 export class FoodPage implements OnInit {
 
 
-
-  foodComStr: string = '';
+  // foodComStr: string = '';
   foodName: string = '';
   foodSugs: FoodModel[] = []
   desc: string = '';
@@ -26,8 +25,16 @@ export class FoodPage implements OnInit {
   }
 
   onSubmit(){
+
+    if(this.foodName === ''){
+      console.log('empty food name');
+      return;
+    }
+
     if (this.apiStorageService.checkFood(this.foodName)) {
-      this.addFood(this.foodName);
+      this.apiStorageService.addFood(this.foodName);
+      this.apiStorageService.addFoodCom(this.foodName, this.desc);
+      this.onClear();
     } else {
       this.alertCtrl.create({
         header: 'Warning',
@@ -43,15 +50,9 @@ export class FoodPage implements OnInit {
   }
 
 
-
-
-
-  addFood(_name: string): void {
-    this.apiStorageService.addFood(_name);
-  }
-
   onClear(): void {
     this.foodName = '';
+    this.desc = '';
     this.clearSugs();
   }
 
