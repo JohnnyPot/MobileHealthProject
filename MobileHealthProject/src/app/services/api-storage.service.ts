@@ -101,9 +101,11 @@ export class ApiStorageService {
         this.userData.foodList = this.foodList;
         this.userData.foodComs = this.foodComs;
         this.userData.medComs = this.medComs;
-        this.loadData();
+        this.userData.foodInterList = this.foodInterList;
+
         this.getUserData();
-        this.getFoodInterList();
+        this.loadData();
+
         // this.updateInterList();
     }
 
@@ -156,12 +158,20 @@ export class ApiStorageService {
                 this.foodList = this.userData.foodList;
                 this.foodComs = this.userData.foodComs;
                 this.medComs = this.userData.medComs;
+                if (!this.userData.foodInterList) {
+                    this.foodInterList = []
+                } else {
+                    this.foodInterList = this.userData.foodInterList;
+                }
                 // console.log(this.medList);
             } else {
                 console.log("Using dummy data");
                 if (user.name != 'Guest') {
                     this.medList = [];
                     this.foodList = [];
+                    this.foodComs = [];
+                    this.medComs = [];
+                    this.foodInterList = [];
                 }
             }
             this.updateInterList();
@@ -179,7 +189,7 @@ export class ApiStorageService {
         }
 
         this.foodInterList.push(foodInter);
-        this.saveFoodInterList();
+        this.saveUserData();
     }
 
 
@@ -189,13 +199,11 @@ export class ApiStorageService {
         this.foodInterList = this.foodInterList.filter(foodInter => {
             return foodInter.food !== _foodName;
         });
-        this.saveFoodInterList();
+        this.saveUserData();
     }
 
     getFilteredFoodInter(activeMeds: string[]) {
-
-        let activeFoodInteractions: FoodInteractionModel[] = []
-
+        let activeFoodInteractions: FoodInteractionModel[] = [];
         for (let foodInter of this.foodInterList) {
 
             if (activeMeds.some(med => {
@@ -545,19 +553,19 @@ export class ApiStorageService {
         });
     }
 
-    saveFoodInterList() {
-        this.storage.setObject("foodInterList", this.foodInterList).then(() => {
-            console.log("Saved foodInterList");
-        });
-    }
-
-    getFoodInterList() {
-        this.storage.getObject("foodInterList").then((foodInterList ) => {
-            console.log("Got foodInterList");
-            console.log(foodInterList);
-            this.foodInterList = foodInterList.value;
-        });
-    }
+    // saveFoodInterList() {
+    //     this.storage.setObject("foodInterList", this.foodInterList).then(() => {
+    //         console.log("Saved foodInterList");
+    //     });
+    // }
+    //
+    // getFoodInterList() {
+    //     this.storage.getObject("foodInterList").then((foodInterList) => {
+    //         console.log("Got foodInterList");
+    //         console.log(foodInterList);
+    //         this.foodInterList = JSON.parse(foodInterList);
+    //     });
+    // }
 
     saveUserData() {
         console.log("entered saveUserData()")
@@ -565,6 +573,7 @@ export class ApiStorageService {
         this.userData.foodList = this.foodList;
         this.userData.foodComs = this.foodComs;
         this.userData.medComs = this.medComs;
+        this.userData.foodInterList = this.foodInterList;
         this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
             console.log('Saved userData for user:' + JSON.stringify(this.activeUser));
             console.log(JSON.stringify(this.userData));
@@ -579,6 +588,7 @@ export class ApiStorageService {
             this.foodList = this.userData.foodList;
             this.foodComs = this.userData.foodComs;
             this.medComs = this.userData.medComs;
+            this.foodInterList = this.userData.foodInterList;
             console.log("got userData");
             console.log(userData);
         });
