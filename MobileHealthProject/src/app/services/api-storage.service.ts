@@ -175,12 +175,17 @@ export class ApiStorageService {
         }
 
         this.foodInterList.push(foodInter);
+        this.saveFoodInterList();
     }
+
+
+
 
     deleteFoodInter(_foodName: string){
         this.foodInterList = this.foodInterList.filter(foodInter => {
             return foodInter.food !== _foodName;
         });
+        this.saveUserData();
     }
 
     getFilteredFoodInter(activeMeds: string[]) {
@@ -521,7 +526,24 @@ export class ApiStorageService {
             }
         });
     }
+    saveUserList() {
+        this.storage.setObject('userList', this.userList).then(() => {
+            console.log("Saved userList");
+        });
+    }
 
+    saveFoodInterList() {
+        this.storage.setObject("foodInterList", this.foodInterList).then(() => {
+            console.log("Saved foodInterList");
+        });
+    }
+
+    saveUserData() {
+        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
+            console.log('Saved userData for user:' + JSON.stringify(this.activeUser));
+            // console.log(JSON.stringify(this.userData));
+        });
+    }
 
     // // Toggle Completed
     // toggleCompleted(interaction: InteractionModel): Observable<any> {
