@@ -102,6 +102,8 @@ export class ApiStorageService {
         this.userData.foodComs = this.foodComs;
         this.userData.medComs = this.medComs;
         this.loadData();
+        this.getUserData();
+        this.getFoodInterList();
         // this.updateInterList();
     }
 
@@ -151,7 +153,9 @@ export class ApiStorageService {
             if (userData) {
                 this.userData = userData;
                 this.medList = this.userData.medList;
-                // this.foodList = this.userData.foodList;
+                this.foodList = this.userData.foodList;
+                this.foodComs = this.userData.foodComs;
+                this.medComs = this.userData.medComs;
                 // console.log(this.medList);
             } else {
                 console.log("Using dummy data");
@@ -185,7 +189,7 @@ export class ApiStorageService {
         this.foodInterList = this.foodInterList.filter(foodInter => {
             return foodInter.food !== _foodName;
         });
-        this.saveUserData();
+        this.saveFoodInterList();
     }
 
     getFilteredFoodInter(activeMeds: string[]) {
@@ -227,6 +231,7 @@ export class ApiStorageService {
             name: foodName
         }
         this.foodList.push(food);
+        this.saveUserData();
     }
 
     deleteFood(foodName: string) {
@@ -235,6 +240,7 @@ export class ApiStorageService {
         });
 
         this.deleteFoodInter(foodName);
+        this.saveUserData();
     }
 
     checkFood(foodName: string) {
@@ -255,6 +261,7 @@ export class ApiStorageService {
         });
 
         this.foodComs[foodComIdx].comment = comment;
+        this.saveUserData();
     }
 
     addFoodCom(food: string, comment: string) {
@@ -265,6 +272,7 @@ export class ApiStorageService {
         }
 
         this.foodComs.push(foodCom);
+        this.saveUserData();
     }
 
     getFoodCom(foodName: string) {
@@ -298,6 +306,7 @@ export class ApiStorageService {
             // console.log(JSON.stringify(this.userData));
         });
         this.updateInterList();
+        this.saveUserData();
     }
 
     deleteMed(recipeId: number) {
@@ -305,6 +314,7 @@ export class ApiStorageService {
             return med.rxnormId !== recipeId;
         });
         this.updateInterList();
+        this.saveUserData();
     }
 
     checkIfMedCom(drug: string): boolean{
@@ -319,6 +329,7 @@ export class ApiStorageService {
         });
 
         this.medComs[medComIdx].comment = comment;
+        this.saveUserData();
     }
 
     deleteMedCom(drug: string): void{
@@ -327,6 +338,7 @@ export class ApiStorageService {
         });
 
         delete this.medComs[medComIdx];
+        this.saveUserData();
     }
 
     addMedCom(drug: string, comment: string) {
@@ -336,7 +348,8 @@ export class ApiStorageService {
             comment: comment
         }
 
-        this.medComs.push(medCom)
+        this.medComs.push(medCom);
+        this.saveUserData();
     }
 
     getMedCom(drugName: string) {
@@ -538,11 +551,38 @@ export class ApiStorageService {
         });
     }
 
+    getFoodInterList() {
+        this.storage.getObject("foodInterList").then((foodInterList ) => {
+            console.log("Got foodInterList");
+            console.log(foodInterList);
+            this.foodInterList = foodInterList.value;
+        });
+    }
+
     saveUserData() {
+        console.log("entered saveUserData()")
+        this.userData.medList = this.medList;
+        this.userData.foodList = this.foodList;
+        this.userData.foodComs = this.foodComs;
+        this.userData.medComs = this.medComs;
         this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
             console.log('Saved userData for user:' + JSON.stringify(this.activeUser));
-            // console.log(JSON.stringify(this.userData));
+            console.log(JSON.stringify(this.userData));
         });
+        console.log("exit saveUserData()");
+    }
+
+    getUserData() {
+        this.storage.getObject("userData" + this.activeUser.id.toString()).then((userData) => {
+            this.userData = userData;
+            this.medList = this.userData.medList;
+            this.foodList = this.userData.foodList;
+            this.foodComs = this.userData.foodComs;
+            this.medComs = this.userData.medComs;
+            console.log("got userData");
+            console.log(userData);
+        });
+
     }
 
     // // Toggle Completed
