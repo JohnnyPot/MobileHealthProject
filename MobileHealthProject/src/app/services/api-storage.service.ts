@@ -103,17 +103,17 @@ export class ApiStorageService {
         this.userData.medComs = this.medComs;
         this.userData.foodInterList = this.foodInterList;
 
-        this.getUserData();
         this.loadData();
-
+        this.getUserData();
         // this.updateInterList();
     }
 
     loadData() {
-        this.storage.getObject('lastActiveUser').then((user) => {
+        this.storage.getObject('lastActiveUser').then(user => {
             if (user) {
                 console.log("loading last active user");
-                this.activeUser = user.value;
+                console.log(user)
+                this.activeUser = <UserModel><unknown>user;
             } else {
                 console.log("no last active user, setting guest");
                 this.activeUser = this.userList[0];
@@ -133,7 +133,6 @@ export class ApiStorageService {
                 this.changeUser(this.activeUser);
             })
         });
-
     }
 
     getActiveUserId() {
@@ -148,16 +147,33 @@ export class ApiStorageService {
         // }
 
         this.activeUser = user;
+        this.storage.setObject("lastActiveUser", user);
         this.storage.getObject("userData" + user.id.toString()).then((userData) => {
             console.log("Changing user. User '" + user.name + "'has saved data:");
-            // console.log(JSON.stringify(userData));
+            console.log(userData);
 
             if (userData) {
                 this.userData = userData;
-                this.medList = this.userData.medList;
-                this.foodList = this.userData.foodList;
-                this.foodComs = this.userData.foodComs;
-                this.medComs = this.userData.medComs;
+                if (!this.medList) {
+                    this.medList = []
+                } else {
+                    this.medList = this.userData.medList;
+                }
+                if (!this.foodList) {
+                    this.foodList = [];
+                } else {
+                    this.foodList = this.userData.foodList;
+                }
+                if (!this.foodComs) {
+                    this.foodComs = [];
+                } else {
+                    this.foodComs = this.userData.foodComs;
+                }
+                if (!this.medComs) {
+                    this.medComs = [];
+                } else {
+                    this.medComs = this.userData.medComs;
+                }
                 if (!this.userData.foodInterList) {
                     this.foodInterList = []
                 } else {
