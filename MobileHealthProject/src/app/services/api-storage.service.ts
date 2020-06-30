@@ -448,10 +448,12 @@ export class ApiStorageService {
         return this.http.get(`${this.interactionUrl}spellingsuggestions.json?name=${name}`);
     }
 
-    // Get Interactions
+    // Get Interactionss
     getInteractions(listOfRxcui: string): Observable<any> {
         return this.http.get(`${this.interactionUrl}interaction/list.json?rxcuis=${listOfRxcui}`);
+
     }
+
 
 
     // ----------------------------------- Med Interactions ------------------------------------------- //
