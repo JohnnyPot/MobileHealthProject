@@ -193,8 +193,6 @@ export class ApiStorageService {
     }
 
 
-
-
     deleteFoodInter(_foodName: string){
         this.foodInterList = this.foodInterList.filter(foodInter => {
             return foodInter.food !== _foodName;
@@ -396,13 +394,15 @@ export class ApiStorageService {
 
     deleteUser(id: number) {
 
-        this.userList = this.userList.filter(user => {
-            return user.id !== id;
-        });
+        if(id != 0){
+            this.userList = this.userList.filter(user => {
+                return user.id !== id;
+            });
 
-        this.storage.setObject('userList', this.userList).then(() => {
-            console.log("Saved userList");
-        });
+            this.storage.setObject('userList', this.userList).then(() => {
+                console.log("Saved userList");
+            });
+        }
 
         this.storage.removeItem("userData" + id.toString()).then(() => {
             console.log("Removed user with id: " + id);

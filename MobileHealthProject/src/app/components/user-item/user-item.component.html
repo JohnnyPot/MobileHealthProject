@@ -3,9 +3,9 @@
     <ion-icon name="person"></ion-icon>
     {{userItem.name}}
   </ion-label>
-  <ion-buttons slot="end" *ngIf="userItem.id!=0 && showButtons()">
+  <ion-buttons slot="end" *ngIf="showButtons()">
 
-    <ion-button (click)="openDetailsModal()">
+    <ion-button (click)="openDetailsModal()" *ngIf="userItem.id!=0">
       <ion-icon name="pencil-outline" slot="icon-only"> </ion-icon>
     </ion-button>
 
