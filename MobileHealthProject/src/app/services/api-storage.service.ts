@@ -322,11 +322,11 @@ export class ApiStorageService {
         if (this.checkMed(med.rxnormId)) {
             this.medList.push(med);
         }
-        this.userData.medList = this.medList;
-        this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
-            console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
-            // console.log(JSON.stringify(this.userData));
-        });
+        //this.userData.medList = this.medList;
+        // this.storage.setObject('userData' + this.activeUser.id.toString(), this.userData).then(() => {
+        //     console.log('Saved medList for user:' + JSON.stringify(this.activeUser));
+        //     // console.log(JSON.stringify(this.userData));
+        // });
         this.updateInterList();
         this.saveUserData();
     }
@@ -587,6 +587,7 @@ export class ApiStorageService {
 
     saveUserData() {
         console.log("entered saveUserData()")
+        this.userData = {};
         this.userData.medList = this.medList;
         this.userData.foodList = this.foodList;
         this.userData.foodComs = this.foodComs;
